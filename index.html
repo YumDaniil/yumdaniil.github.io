@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101112">
+  <meta name="description" content="Prism — единая цифровая среда, задуманная как цельный опыт. Цифровое проще с Prism.">
+  <title>Prism — цифровое проще</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="stylesheet" href="./site.css">
+  <script src="./site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Перейти к содержанию</a>
+
+  <div id="page-progress" aria-hidden="true">
+    <span class="page-progress__fill"></span>
+  </div>
+
+  <canvas class="motion-world" id="prism-scene" aria-hidden="true"></canvas>
+
+  <header class="site-header" id="site-header">
+    <a class="brand" href="#hero" aria-label="Prism — на главную">
+      <svg class="brand__mark" viewBox="0 0 40 40" role="img" aria-labelledby="brand-mark-title">
+        <title id="brand-mark-title">Знак Prism</title>
+        <path d="M20 3.5 36.5 32H3.5L20 3.5Z" fill="none" stroke="currentColor" stroke-width="1.4" />
+        <path d="m20 3.5 5.3 28.5M20 3.5 14.7 32" fill="none" stroke="currentColor" stroke-width="1.1" />
+      </svg>
+      <span class="brand__word">PRISM</span>
+    </a>
+
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Открыть меню">
+      <span class="menu-toggle__line" aria-hidden="true"></span>
+      <span class="menu-toggle__line" aria-hidden="true"></span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Основная навигация">
+      <a class="site-nav__link" href="#idea">Идея</a>
+      <a class="site-nav__link" href="#projects">Проекты</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="hero" aria-labelledby="hero-title">
+      <div class="hero__copy" data-reveal>
+        <p class="eyebrow"><span class="eyebrow__rule" aria-hidden="true"></span>Одна цифровая среда</p>
+        <h1 class="hero__title" id="hero-title">Цифровое<br><span class="hero__title-accent">проще</span></h1>
+        <p class="hero__byline">с Prism</p>
+        <p class="hero__description">Prism — единая цифровая среда, задуманная как цельный опыт. Мы стремимся делать сложные задачи и технологии понятнее.</p>
+        <div class="hero__actions">
+          <a class="text-link text-link--primary" href="#idea">
+            <span>Почувствовать идею</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </a>
+          <a class="text-link text-link--quiet" href="#projects">Проекты Prism</a>
+        </div>
+      </div>
+
+      <figure class="hero__visual" data-reveal>
+        <svg class="prism-art" id="scroll-prism" viewBox="0 0 1000 760" role="img" aria-labelledby="prism-title prism-description" focusable="false">
+          <title id="prism-title">Свет проходит сквозь призму</title>
+          <desc id="prism-description">Абстрактная стеклянная призма преломляет тонкий луч, который расходится спектром в темноте.</desc>
+          <defs>
+            <linearGradient id="beam-spectrum" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#f6f0df" stop-opacity=".2" />
+              <stop offset=".45" stop-color="#f6f0df" stop-opacity=".9" />
+              <stop offset=".7" stop-color="#b2d8d8" />
+              <stop offset="1" stop-color="#f0a7b8" stop-opacity=".65" />
+            </linearGradient>
+            <linearGradient id="prism-glass" x1=".18" y1=".1" x2=".84" y2=".92">
+              <stop offset="0" stop-color="#f8f5ea" stop-opacity=".13" />
+              <stop offset=".48" stop-color="#c6d7d2" stop-opacity=".035" />
+              <stop offset="1" stop-color="#d8a8ba" stop-opacity=".12" />
+            </linearGradient>
+            <linearGradient id="prism-edge" x1=".05" y1=".1" x2=".92" y2=".9">
+              <stop offset="0" stop-color="#f8f1dc" stop-opacity=".74" />
+              <stop offset=".46" stop-color="#b5d1d1" stop-opacity=".46" />
+              <stop offset="1" stop-color="#df9eb0" stop-opacity=".7" />
+            </linearGradient>
+            <radialGradient id="light-halo">
+              <stop offset="0" stop-color="#e4d8b8" stop-opacity=".16" />
+              <stop offset="1" stop-color="#e4d8b8" stop-opacity="0" />
+            </radialGradient>
+            <filter id="beam-glow" x="-30%" y="-100%" width="160%" height="300%">
+              <feGaussianBlur stdDeviation="7" />
+            </filter>
+          </defs>
+
+          <g class="prism-art__field" data-parallax="0.12" aria-hidden="true">
+            <circle cx="505" cy="370" r="330" fill="url(#light-halo)" />
+            <path d="M76 615H925M128 576H873" fill="none" stroke="#e9e4d7" stroke-opacity=".1" stroke-width="1" />
+            <path d="M180 124v30m-15-15h30M832 542v24m-12-12h24" fill="none" stroke="#eee8d9" stroke-opacity=".34" stroke-width="1" />
+            <circle cx="180" cy="139" r="2" fill="#eee8d9" fill-opacity=".7" />
+            <circle cx="832" cy="554" r="2" fill="#eee8d9" fill-opacity=".7" />
+          </g>
+
+          <g class="prism-art__rays" data-parallax="0.2" aria-hidden="true">
+            <path d="M38 390 424 390" fill="none" stroke="#f1ead7" stroke-opacity=".22" stroke-width="13" filter="url(#beam-glow)" />
+            <path d="M38 390 424 390" fill="none" stroke="#f4efdf" stroke-opacity=".76" stroke-width="1.5" />
+            <path d="M574 390 930 262" fill="none" stroke="#eaa6b5" stroke-opacity=".28" stroke-width="1" />
+            <path d="M574 390 930 306" fill="none" stroke="#e9c49d" stroke-opacity=".36" stroke-width="1" />
+            <path d="M574 390 930 350" fill="none" stroke="#d9d9b5" stroke-opacity=".52" stroke-width="1" />
+            <path d="M574 390 930 394" fill="none" stroke="#a9c9c9" stroke-opacity=".7" stroke-width="1.2" />
+            <path d="M574 390 930 438" fill="none" stroke="#b2b2d0" stroke-opacity=".44" stroke-width="1" />
+            <path d="M574 390 930 482" fill="none" stroke="#d5a9c2" stroke-opacity=".35" stroke-width="1" />
+            <path id="beam-path" d="M38 390H424L574 390 930 394" fill="none" stroke="url(#beam-spectrum)" stroke-width="2" />
+          </g>
+
+          <g class="prism-art__object" data-parallax="0.08" aria-hidden="true">
+            <path d="M424 177 614 514 234 514 424 177Z" fill="url(#prism-glass)" stroke="url(#prism-edge)" stroke-width="1.5" />
+            <path d="M424 177 424 514M424 177 614 514M424 514 234 514" fill="none" stroke="#f2eee2" stroke-opacity=".28" stroke-width="1" />
+            <path d="M424 177 401 486 424 514" fill="none" stroke="#fff9e8" stroke-opacity=".18" stroke-width="1" />
+            <path d="M424 177 614 514 424 514" fill="#d9e0d9" fill-opacity=".025" />
+          </g>
+        </svg>
+        <figcaption class="hero__caption">
+          <span class="hero__caption-label"><span aria-hidden="true">01</span> Одна идея — множество граней</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="idea section" id="idea" aria-labelledby="idea-title">
+      <div class="section__index" data-reveal aria-hidden="true">01 <span></span> ЕДИНАЯ ИДЕЯ</div>
+      <div class="idea__layout">
+        <h2 class="section__title idea__title" id="idea-title" data-reveal>Одна среда.<br><em>Общий фокус.</em></h2>
+        <div class="idea__text" data-reveal>
+          <p class="idea__lead">Prism создаётся не как витрина разрозненных продуктов, а как одна цельная цифровая среда.</p>
+          <p>Общий язык, единый опыт и внимание к тому, чтобы сложное становилось понятнее. Сейчас Prism только формируется.</p>
+        </div>
+      </div>
+      <div class="idea__aside" data-reveal>
+        <span class="idea__aside-mark" aria-hidden="true">P</span>
+        <p>Один Prism.<br>Целостный взгляд на цифровое.</p>
+      </div>
+    </section>
+
+    <section class="projects section" id="projects" aria-labelledby="projects-title">
+      <div class="section__index" data-reveal aria-hidden="true">02 <span></span> ПРОЕКТЫ</div>
+      <div class="projects__heading" data-reveal>
+        <p class="eyebrow">Первый проект экосистемы</p>
+        <h2 class="section__title" id="projects-title">Всё начинается<br>с первого проекта.</h2>
+      </div>
+      <article class="project-card" data-reveal aria-labelledby="project-compare-title">
+        <div class="project-card__copy">
+          <div class="project-card__meta">
+            <span class="project-card__number"><span>01</span> / ИНСТРУМЕНТ</span>
+            <span class="project-card__status"><span class="project-card__status-dot" aria-hidden="true"></span>Страница готовится</span>
+          </div>
+          <h3 class="project-card__title" id="project-compare-title">Prism Site Compare</h3>
+          <p class="project-card__description">Сравнивайте снимки экранов и веб-страницы — рядом, в наложении или переключаясь между ними.</p>
+          <ul class="project-card__features" aria-label="Возможности проекта">
+            <li>Снимки экрана</li>
+            <li>Веб-страницы</li>
+            <li>Три режима сравнения</li>
+          </ul>
+          <a class="project-card__link" href="https://prism.net.ru/projects/prism-site-compare/">
+            <span>Открыть страницу проекта</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </a>
+        </div>
+        <div class="project-card__visual" aria-hidden="true">
+          <svg class="project-preview" viewBox="0 0 680 400" focusable="false">
+            <defs>
+              <linearGradient id="preview-a" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#d7bd8c" stop-opacity=".34" />
+                <stop offset="1" stop-color="#a9c6c3" stop-opacity=".08" />
+              </linearGradient>
+              <linearGradient id="preview-b" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0" stop-color="#a9c6c3" stop-opacity=".28" />
+                <stop offset="1" stop-color="#d89a88" stop-opacity=".1" />
+              </linearGradient>
+            </defs>
+            <rect x="1" y="1" width="678" height="398" fill="#141512" stroke="rgba(240,238,231,.24)" />
+            <path d="M1 49.5H679" stroke="rgba(240,238,231,.15)" />
+            <text x="25" y="32" fill="#e8c486" font-size="11" letter-spacing="2.2">PRISM / COMPARE</text>
+            <circle cx="635" cy="25" r="3" fill="#e8c486" opacity=".75" />
+            <circle cx="650" cy="25" r="3" fill="#a9c6c3" opacity=".65" />
+            <circle cx="665" cy="25" r="3" fill="#d89a88" opacity=".65" />
+            <rect x="22" y="70" width="304" height="282" fill="#1a1b17" stroke="rgba(240,238,231,.14)" />
+            <rect x="354" y="70" width="304" height="282" fill="#1a1b17" stroke="rgba(240,238,231,.14)" />
+            <rect x="22" y="70" width="304" height="32" fill="rgba(240,238,231,.035)" />
+            <rect x="354" y="70" width="304" height="32" fill="rgba(240,238,231,.035)" />
+            <text x="38" y="91" fill="#a09f96" font-size="10" letter-spacing="1.8">ВАРИАНТ A</text>
+            <text x="370" y="91" fill="#a09f96" font-size="10" letter-spacing="1.8">ВАРИАНТ B</text>
+            <rect x="39" y="119" width="270" height="128" fill="url(#preview-a)" />
+            <path d="M39 226 112 168l51 37 55-62 91 88v16H39Z" fill="rgba(16,17,15,.48)" />
+            <circle cx="249" cy="151" r="15" fill="rgba(240,238,231,.3)" />
+            <path d="M39 266H252M39 284H286M39 302H212" stroke="rgba(240,238,231,.2)" stroke-width="3" />
+            <rect x="371" y="119" width="270" height="128" fill="url(#preview-b)" />
+            <path d="M371 225 446 183l55 29 55-72 85 78v29H371Z" fill="rgba(16,17,15,.48)" />
+            <circle cx="583" cy="151" r="15" fill="rgba(240,238,231,.3)" />
+            <path d="M371 266H585M371 284H624M371 302H552" stroke="rgba(240,238,231,.2)" stroke-width="3" />
+            <path d="M340 70V352" stroke="#e8c486" stroke-opacity=".75" />
+            <circle cx="340" cy="211" r="19" fill="#171815" stroke="#e8c486" stroke-opacity=".78" />
+            <path d="m336 205-6 6 6 6m8-12 6 6-6 6" fill="none" stroke="#f0eee7" stroke-opacity=".78" stroke-width="1.2" />
+            <text x="24" y="379" fill="#a09f96" font-size="9" letter-spacing="1.7">СРАВНЕНИЕ ДВУХ ВАРИАНТОВ</text>
+            <text x="656" y="379" text-anchor="end" fill="#a09f96" font-size="9" letter-spacing="1.7">01 — 02</text>
+          </svg>
+        </div>
+        <span class="project-card__coordinate" aria-hidden="true">PRISM / 01</span>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="footer">
+    <a class="brand brand--footer" href="#hero" aria-label="Prism — в начало страницы">
+      <svg class="brand__mark" viewBox="0 0 40 40" role="img" aria-labelledby="footer-brand-mark-title">
+        <title id="footer-brand-mark-title">Знак Prism</title>
+        <path d="M20 3.5 36.5 32H3.5L20 3.5Z" fill="none" stroke="currentColor" stroke-width="1.4" />
+        <path d="m20 3.5 5.3 28.5M20 3.5 14.7 32" fill="none" stroke="currentColor" stroke-width="1.1" />
+      </svg>
+      <span class="brand__word">PRISM</span>
+    </a>
+    <p class="site-footer__note">Единая цифровая среда</p>
+    <nav class="site-footer__nav" aria-label="Навигация в подвале">
+      <a href="#idea">Идея</a>
+      <a href="#projects">Проекты</a>
+      <a href="#hero">В начало <span aria-hidden="true">↑</span></a>
+    </nav>
+    <p class="site-footer__signature">Цифровое — проще.</p>
+  </footer>
+  <button id="back-to-top" class="back-to-top" type="button" aria-label="Вернуться к началу страницы" aria-hidden="true" tabindex="-1">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5m-6 6 6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+  </button>
+</body>
+</html>
