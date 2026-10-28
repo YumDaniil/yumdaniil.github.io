@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Локальное сравнение двух снимков сайта.">
+    <meta name="theme-color" content="#0e1012">
+    <title>Prism Site Compare — сравнение снимков сайта</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#mainContent">Перейти к рабочей области</a>
+
+    <div id="appShell" class="app-shell">
+      <header class="app-header">
+        <a class="brand" href="#mainContent" aria-label="Prism Site Compare — к рабочей области">
+          <span class="brand-mark" aria-hidden="true">P</span>
+          <span class="brand-name">Prism <span>Site Compare</span></span>
+        </a>
+      </header>
+
+      <main id="mainContent" class="workspace" tabindex="-1">
+        <section class="intro" aria-labelledby="pageTitle">
+          <div>
+            <p class="eyebrow">Рабочая область</p>
+            <h1 id="pageTitle">Сравнение сайтов</h1>
+            <p class="intro-copy">Выберите способ и сравните две версии сайта.</p>
+          </div>
+          <p class="local-note">
+            <span class="local-note-mark" aria-hidden="true">●</span>
+            Изображения обрабатываются локально в браузере и не отправляются на сервер.
+          </p>
+        </section>
+
+        <noscript>
+          <p class="noscript-message">Для загрузки изображений и работы режимов сравнения включите JavaScript.</p>
+        </noscript>
+
+        <div class="source-selector" role="group" aria-label="Способ сравнения">
+          <button type="button" data-source="screenshots" aria-pressed="true">По скриншотам</button>
+          <button type="button" data-source="live" aria-pressed="false">Через открытие</button>
+          <details class="source-help"><summary aria-label="О способах сравнения">?</summary><p>По скриншотам: изображения остаются в браузере. Через открытие: браузер загружает сайты напрямую; некоторые сайты запрещают встраивание, снимки автоматически не создаются.</p></details>
+        </div>
+
+        <section id="screenshotSources" class="source-section" aria-labelledby="sourceTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">01 / Источники</p>
+              <h2 id="sourceTitle">Снимки для сравнения</h2>
+            </div>
+            <p class="section-hint">Добавьте по одному изображению в каждую область.</p>
+          </div>
+
+          <div class="upload-grid">
+            <section
+              id="beforeDropZone"
+              class="upload-card"
+              data-drop-zone="before"
+              aria-labelledby="beforeTitle"
+            >
+              <div class="upload-card-heading">
+                <span class="source-index" aria-hidden="true">A</span>
+                <div>
+                  <h3 id="beforeTitle">До изменений</h3>
+                  <p>Исходный снимок</p>
+                </div>
+              </div>
+              <p id="beforeDropHint" class="drop-hint">Перетащите изображение сюда или выберите файл.</p>
+              <input
+                id="beforeInput"
+                class="file-input"
+                type="file"
+                accept="image/*"
+                tabindex="-1"
+                aria-hidden="true"
+                aria-label="Выбрать изображение до изменений"
+                aria-describedby="beforeDropHint"
+              >
+              <button id="beforePickButton" class="button button-secondary" type="button" aria-controls="beforeInput">
+                Выбрать снимок «до»
+              </button>
+              <dl class="file-details">
+                <div>
+                  <dt>Файл</dt>
+                  <dd id="beforeFileName">Файл не выбран</dd>
+                </div>
+                <div>
+                  <dt>Размер</dt>
+                  <dd id="beforeDimensions">—</dd>
+                </div>
+              </dl>
+            </section>
+
+            <section
+              id="afterDropZone"
+              class="upload-card"
+              data-drop-zone="after"
+              aria-labelledby="afterTitle"
+            >
+              <div class="upload-card-heading">
+                <span class="source-index" aria-hidden="true">B</span>
+                <div>
+                  <h3 id="afterTitle">После изменений</h3>
+                  <p>Обновлённый снимок</p>
+                </div>
+              </div>
+              <p id="afterDropHint" class="drop-hint">Перетащите изображение сюда или выберите файл.</p>
+              <input
+                id="afterInput"
+                class="file-input"
+                type="file"
+                accept="image/*"
+                tabindex="-1"
+                aria-hidden="true"
+                aria-label="Выбрать изображение после изменений"
+                aria-describedby="afterDropHint"
+              >
+              <button id="afterPickButton" class="button button-secondary" type="button" aria-controls="afterInput">
+                Выбрать снимок «после»
+              </button>
+              <dl class="file-details">
+                <div>
+                  <dt>Файл</dt>
+                  <dd id="afterFileName">Файл не выбран</dd>
+                </div>
+                <div>
+                  <dt>Размер</dt>
+                  <dd id="afterDimensions">—</dd>
+                </div>
+              </dl>
+            </section>
+          </div>
+        </section>
+
+        <section id="liveSources" class="source-section" hidden aria-label="Адреса сайтов">
+          <p class="live-description" id="liveHint">Введите два адреса и откройте страницы для просмотра. Некоторые сайты запрещают отображение во встроенном окне; снимки экрана здесь не создаются. При открытии браузер обращается к указанным сайтам.</p>
+          <div class="live-input-grid">
+            <div class="live-field">
+              <label for="liveUrlBefore">Адрес сайта «до»</label>
+              <input id="liveUrlBefore" type="url" inputmode="url" placeholder="https://example.com" autocomplete="off" spellcheck="false" aria-describedby="liveHint">
+            </div>
+            <div class="live-field">
+              <label for="liveUrlAfter">Адрес сайта «после»</label>
+              <input id="liveUrlAfter" type="url" inputmode="url" placeholder="https://example.com" autocomplete="off" spellcheck="false" aria-describedby="liveHint">
+            </div>
+          </div>
+          <div class="live-actions">
+            <button id="liveOpenButton" class="button button-primary" type="button">Открыть сайты</button>
+            <button id="liveClearButton" class="button button-quiet" type="button">Очистить сайты</button>
+          </div>
+          <p id="liveStatus" class="live-status" role="status" aria-live="polite" aria-atomic="true">Введите адреса сайтов для просмотра.</p>
+        </section>
+
+        <section id="comparisonArea" class="comparison-section" aria-labelledby="comparisonTitle">
+          <div class="section-heading comparison-heading">
+            <div>
+              <p class="eyebrow">02 / Сопоставление</p>
+              <h2 id="comparisonTitle">Область сравнения</h2>
+            </div>
+            <div id="screenshotActions" class="comparison-actions" aria-label="Действия со снимками">
+              <button id="swapButton" class="button button-quiet" type="button" aria-label="Поменять снимки местами">
+                Поменять местами
+              </button>
+              <button id="clearButton" class="button button-quiet" type="button">
+                Очистить
+              </button>
+            </div>
+          </div>
+
+          <div class="comparison-toolbar">
+            <fieldset class="mode-switcher">
+              <legend>Режим просмотра</legend>
+              <div class="mode-options">
+                <button class="mode-button" type="button" data-mode="side" aria-pressed="true">
+                  Рядом
+                </button>
+                <button class="mode-button" type="button" data-mode="overlay" aria-pressed="false">
+                  Наложение
+                </button>
+                <button class="mode-button" type="button" data-mode="blink" aria-pressed="false">
+                  Мигание
+                </button>
+              </div>
+            </fieldset>
+
+            <div id="wipeControls" class="wipe-controls" hidden>
+              <label for="wipeRange">
+                Положение разделителя
+                <output id="wipeValue" for="wipeRange">50%</output>
+              </label>
+              <input id="wipeRange" type="range" min="0" max="100" step="1" value="50">
+            </div>
+
+            <div id="blinkControls" class="blink-controls" hidden>
+              <button id="blinkToggle" class="button button-secondary" type="button" aria-pressed="false">
+                Пауза мигания
+              </button>
+              <button id="blinkStepButton" class="button button-quiet" type="button">
+                Показать следующий вариант
+              </button>
+            </div>
+          </div>
+
+          <p id="statusMessage" class="status-message" role="status" aria-live="polite" aria-atomic="true">
+            Добавьте снимки «до» и «после», чтобы начать сравнение.
+          </p>
+
+          <div class="comparison-canvas">
+            <div id="emptyState" class="empty-state" aria-labelledby="emptyTitle">
+              <span class="empty-mark" aria-hidden="true">↔</span>
+              <h3 id="emptyTitle">Здесь появится сравнение</h3>
+              <p>Загрузите два снимка или откройте демонстрационный пример.</p>
+              <button id="demoButton" class="button button-primary" type="button" data-demo-source="demoAssets">
+                Открыть демо-пример
+              </button>
+            </div>
+
+            <div
+              id="compareStage"
+              class="compare-stage"
+              role="group"
+              aria-label="Сравнение снимков до и после изменений"
+              tabindex="-1"
+              data-mode="side"
+              data-blink-show="before"
+              style="--wipe-position: 50%;"
+              hidden
+            >
+              <figure id="beforeView" class="compare-view compare-view-before">
+                <figcaption>До изменений</figcaption>
+                <img id="beforeImage" alt="Снимок сайта до изменений">
+              </figure>
+              <figure id="afterView" class="compare-view compare-view-after">
+                <figcaption>После изменений</figcaption>
+                <img id="afterImage" alt="Снимок сайта после изменений">
+              </figure>
+              <div class="wipe-handle" aria-hidden="true"><span>↔</span></div>
+            </div>
+            <div id="liveStage" class="live-stage" data-mode="side" data-blink-show="before" style="--wipe-position: 50%" hidden aria-label="Сравнение открытых сайтов" role="group">
+              <section class="live-view live-before"><span>До изменений</span><iframe id="liveFrameBefore" title="Сайт до изменений" sandbox="allow-scripts allow-forms" referrerpolicy="no-referrer" loading="lazy"></iframe></section>
+              <section class="live-view live-after"><span>После изменений</span><iframe id="liveFrameAfter" title="Сайт после изменений" sandbox="allow-scripts allow-forms" referrerpolicy="no-referrer" loading="lazy"></iframe></section>
+              <div class="wipe-handle" aria-hidden="true"><span>↔</span></div>
+            </div>
+          </div>
+        </section>
+
+
+      </main>
+
+      <footer class="app-footer">
+        <p>Prism Site Compare</p>
+        <p>Сравнивайте версии сайта в одном рабочем пространстве.</p>
+      </footer>
+
+      <template id="demoAssets">
+        <img
+          data-demo-image="before"
+          alt="Демонстрационный снимок сайта до изменений"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 420'%3E%3Crect width='640' height='420' fill='%23eef1f5'/%3E%3Crect x='32' y='28' width='576' height='364' rx='18' fill='white'/%3E%3Cpath d='M50 28h540a18 18 0 0 1 18 18v34H32V46a18 18 0 0 1 18-18' fill='%231b2332'/%3E%3Ccircle cx='59' cy='54' r='6' fill='%23ff776d'/%3E%3Ccircle cx='79' cy='54' r='6' fill='%23ffc857'/%3E%3Ccircle cx='99' cy='54' r='6' fill='%2367d7a3'/%3E%3Crect x='64' y='112' width='210' height='16' rx='8' fill='%23232d3d'/%3E%3Crect x='64' y='144' width='296' height='9' rx='4' fill='%23aab3c0'/%3E%3Crect x='64' y='162' width='242' height='9' rx='4' fill='%23c3cad4'/%3E%3Crect x='64' y='196' width='112' height='34' rx='8' fill='%237c86f7'/%3E%3Crect x='64' y='254' width='512' height='106' rx='10' fill='%23f2f4f8'/%3E%3Crect x='84' y='278' width='130' height='58' rx='8' fill='%23d7deea'/%3E%3Crect x='234' y='278' width='130' height='58' rx='8' fill='%23d7deea'/%3E%3Crect x='384' y='278' width='170' height='10' rx='5' fill='%23c3cad4'/%3E%3Crect x='384' y='300' width='142' height='8' rx='4' fill='%23d7deea'/%3E%3C/svg%3E"
+        >
+        <img
+          data-demo-image="after"
+          alt="Демонстрационный снимок сайта после изменений"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 420'%3E%3Crect width='640' height='420' fill='%23eef1f5'/%3E%3Crect x='32' y='28' width='576' height='364' rx='18' fill='white'/%3E%3Cpath d='M50 28h540a18 18 0 0 1 18 18v34H32V46a18 18 0 0 1 18-18' fill='%231b2332'/%3E%3Ccircle cx='59' cy='54' r='6' fill='%23ff776d'/%3E%3Ccircle cx='79' cy='54' r='6' fill='%23ffc857'/%3E%3Ccircle cx='99' cy='54' r='6' fill='%2367d7a3'/%3E%3Crect x='64' y='108' width='268' height='19' rx='9' fill='%23232d3d'/%3E%3Crect x='64' y='144' width='330' height='9' rx='4' fill='%23aab3c0'/%3E%3Crect x='64' y='162' width='278' height='9' rx='4' fill='%23c3cad4'/%3E%3Crect x='64' y='194' width='132' height='38' rx='19' fill='%2326a987'/%3E%3Crect x='64' y='254' width='512' height='106' rx='10' fill='%23f0faf7'/%3E%3Crect x='84' y='276' width='150' height='62' rx='10' fill='%23c9eee3'/%3E%3Crect x='254' y='276' width='150' height='62' rx='10' fill='%23c9eee3'/%3E%3Crect x='424' y='278' width='130' height='10' rx='5' fill='%23a8daca'/%3E%3Crect x='424' y='300' width='110' height='8' rx='4' fill='%23c9eee3'/%3E%3C/svg%3E"
+        >
+      </template>
+    </div>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
