@@ -7,9 +7,20 @@
     <meta name="theme-color" content="#0e1012">
     <title>Prism Site Compare — сравнение снимков сайта</title>
     <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./motion.css">
   </head>
   <body>
     <a class="skip-link" href="#mainContent">Перейти к рабочей области</a>
+
+    <div class="ambient-stage" aria-hidden="true">
+      <span class="ambient-orb ambient-orb-a"></span>
+      <span class="ambient-orb ambient-orb-b"></span>
+      <span class="ambient-orb ambient-orb-c"></span>
+      <span class="ambient-grid"></span>
+      <span class="ambient-grain"></span>
+    </div>
+
+    <div class="page-progress" aria-hidden="true"><i id="pageProgressBar"></i></div>
 
     <div id="appShell" class="app-shell">
       <header class="app-header">
@@ -17,32 +28,48 @@
           <span class="brand-mark" aria-hidden="true">P</span>
           <span class="brand-name">Prism <span>Site Compare</span></span>
         </a>
+        <span class="header-status"><span aria-hidden="true"></span>Локально</span>
       </header>
 
       <main id="mainContent" class="workspace" tabindex="-1">
-        <section class="intro" aria-labelledby="pageTitle">
+        <section class="intro" aria-labelledby="pageTitle" data-reveal>
           <div>
             <p class="eyebrow">Рабочая область</p>
-            <h1 id="pageTitle">Сравнение сайтов</h1>
+            <h1 id="pageTitle">Сравнение<br><em>сайтов</em></h1>
             <p class="intro-copy">Выберите способ и сравните две версии сайта.</p>
           </div>
-          <p class="local-note">
-            <span class="local-note-mark" aria-hidden="true">●</span>
-            Изображения обрабатываются локально в браузере и не отправляются на сервер.
-          </p>
+          <aside class="intro-aside">
+            <div class="compare-orbit" aria-hidden="true">
+              <span class="compare-orbit__ring compare-orbit__ring-a"></span>
+              <span class="compare-orbit__ring compare-orbit__ring-b"></span>
+              <span class="compare-orbit__beam"></span>
+              <span class="compare-orbit__pane compare-orbit__pane-a">A</span>
+              <span class="compare-orbit__pane compare-orbit__pane-b">B</span>
+              <span class="compare-orbit__handle">↔</span>
+              <span class="compare-orbit__star compare-orbit__star-a"></span>
+              <span class="compare-orbit__star compare-orbit__star-b"></span>
+            </div>
+            <p class="local-note">
+              <span class="local-note-mark" aria-hidden="true">●</span>
+              Изображения обрабатываются локально в браузере и не отправляются на сервер.
+            </p>
+          </aside>
         </section>
 
         <noscript>
           <p class="noscript-message">Для загрузки изображений и работы режимов сравнения включите JavaScript.</p>
         </noscript>
 
-        <div class="source-selector" role="group" aria-label="Способ сравнения">
-          <button type="button" data-source="screenshots" aria-pressed="true">По скриншотам</button>
-          <button type="button" data-source="live" aria-pressed="false">Через открытие</button>
+        <div class="source-selector" role="group" aria-label="Способ сравнения" id="sourceSelector">
+          <div class="source-tabs">
+            <span class="source-glider" aria-hidden="true"></span>
+            <button type="button" data-source="screenshots" aria-pressed="true">По скриншотам</button>
+            <button type="button" data-source="live" aria-pressed="false">Через открытие</button>
+          </div>
           <details class="source-help"><summary aria-label="О способах сравнения">?</summary><p>По скриншотам: изображения остаются в браузере. Через открытие: браузер загружает сайты напрямую; некоторые сайты запрещают встраивание, снимки автоматически не создаются.</p></details>
         </div>
 
-        <section id="screenshotSources" class="source-section" aria-labelledby="sourceTitle">
+        <section id="screenshotSources" class="source-section" aria-labelledby="sourceTitle" data-reveal>
           <div class="section-heading">
             <div>
               <p class="eyebrow">01 / Источники</p>
@@ -54,7 +81,7 @@
           <div class="upload-grid">
             <section
               id="beforeDropZone"
-              class="upload-card"
+              class="upload-card upload-card--a"
               data-drop-zone="before"
               aria-labelledby="beforeTitle"
             >
@@ -93,7 +120,7 @@
 
             <section
               id="afterDropZone"
-              class="upload-card"
+              class="upload-card upload-card--b"
               data-drop-zone="after"
               aria-labelledby="afterTitle"
             >
@@ -151,7 +178,7 @@
           <p id="liveStatus" class="live-status" role="status" aria-live="polite" aria-atomic="true">Введите адреса сайтов для просмотра.</p>
         </section>
 
-        <section id="comparisonArea" class="comparison-section" aria-labelledby="comparisonTitle">
+        <section id="comparisonArea" class="comparison-section" aria-labelledby="comparisonTitle" data-reveal>
           <div class="section-heading comparison-heading">
             <div>
               <p class="eyebrow">02 / Сопоставление</p>
@@ -207,7 +234,14 @@
 
           <div class="comparison-canvas">
             <div id="emptyState" class="empty-state" aria-labelledby="emptyTitle">
-              <span class="empty-mark" aria-hidden="true">↔</span>
+              <div class="empty-visual" aria-hidden="true">
+                <span class="empty-orbit empty-orbit-a"></span>
+                <span class="empty-orbit empty-orbit-b"></span>
+                <span class="empty-axis"></span>
+                <span class="empty-label empty-label-a">A</span>
+                <span class="empty-label empty-label-b">B</span>
+                <span class="empty-mark">↔</span>
+              </div>
               <h3 id="emptyTitle">Здесь появится сравнение</h3>
               <p>Загрузите два снимка или откройте демонстрационный пример.</p>
               <button id="demoButton" class="button button-primary" type="button" data-demo-source="demoAssets">
@@ -226,6 +260,11 @@
               style="--wipe-position: 50%;"
               hidden
             >
+              <span class="stage-corner stage-corner-a" aria-hidden="true"></span>
+              <span class="stage-corner stage-corner-b" aria-hidden="true"></span>
+              <span class="stage-corner stage-corner-c" aria-hidden="true"></span>
+              <span class="stage-corner stage-corner-d" aria-hidden="true"></span>
+              <span class="stage-scanline" aria-hidden="true"></span>
               <figure id="beforeView" class="compare-view compare-view-before">
                 <figcaption>До изменений</figcaption>
                 <img id="beforeImage" alt="Снимок сайта до изменений">
@@ -247,7 +286,7 @@
 
       </main>
 
-      <footer class="app-footer">
+      <footer class="app-footer" data-reveal>
         <p>Prism Site Compare</p>
         <p>Сравнивайте версии сайта в одном рабочем пространстве.</p>
       </footer>
@@ -267,5 +306,6 @@
     </div>
 
     <script src="./app.js" defer></script>
+    <script src="./motion.js" defer></script>
   </body>
 </html>
