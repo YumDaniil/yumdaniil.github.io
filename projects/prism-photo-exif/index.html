@@ -8,6 +8,7 @@
   <meta name="theme-color" content="#0e1012">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="motion.css">
 </head>
 <body>
   <div class="ambient" aria-hidden="true">
@@ -16,6 +17,8 @@
     <span class="ambient-orb ambient-orb-c"></span>
     <span class="ambient-grain"></span>
   </div>
+
+  <div class="page-progress" aria-hidden="true"><i id="pageProgressBar"></i></div>
 
   <a class="skip-link" href="#appMain">Перейти к содержимому</a>
 
@@ -74,7 +77,7 @@
         <p class="mode-hint" id="modeHint">Загрузите фотографию, чтобы увидеть её данные</p>
       </section>
 
-      <div class="photo-workspace">
+      <div class="photo-workspace" data-reveal>
         <aside class="panel photo-card" aria-labelledby="photoTitle">
           <div class="panel-heading">
             <div>
@@ -308,6 +311,7 @@
                     <li class="clean-list-empty">Ничего не выбрано</li>
                   </ul>
                   <div class="clean-total"><strong id="cleanCount">0</strong><span>полей</span></div>
+                  <div class="clean-meter" aria-hidden="true"><i id="cleanMeter"></i></div>
                   <button class="button button-primary" id="exportButton" type="button" disabled>Скачать чистую копию</button>
                   <p class="clean-note" id="cleanNote">Ориентация и цветовой профиль сохраняются. Оригинал не меняется.</p>
                   <div class="export-result" id="exportResult" role="status" hidden>
@@ -327,7 +331,7 @@
       </div>
     </main>
 
-    <footer class="app-footer">
+    <footer class="app-footer" data-reveal>
       <span>Prism Photo EXIF</span>
       <span>Данные остаются на этом Mac · <span id="footerYear">2026</span></span>
     </footer>
@@ -341,5 +345,6 @@
   <script src="vendor/piexif.js"></script>
   <script src="assets/demo-photo.js"></script>
   <script src="app.js"></script>
+  <script src="motion.js"></script>
 </body>
 </html>
