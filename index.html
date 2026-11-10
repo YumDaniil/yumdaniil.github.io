@@ -8,7 +8,9 @@
   <title>Prism — От идеи до работающего продукта</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="stylesheet" href="./site.css">
+  <link rel="stylesheet" href="./project-modal.css">
   <script src="./site.js" defer></script>
+  <script src="./project-modal.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Перейти к содержанию</a>
@@ -152,10 +154,10 @@
             <li>Веб-страницы</li>
             <li>Три режима сравнения</li>
           </ul>
-          <a class="project-card__link" href="https://prism.net.ru/projects/prism-site-compare/">
-            <span>Открыть страницу проекта</span>
+          <button class="project-card__link project-card__open" type="button" data-project-open="compare" aria-haspopup="dialog" aria-controls="project-modal" aria-expanded="false">
+            <span>Карточка проекта</span>
             <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
-          </a>
+          </button>
         </div>
         <div class="project-card__visual" aria-hidden="true">
           <svg class="project-preview" viewBox="0 0 680 400" focusable="false">
@@ -212,10 +214,10 @@
             <li>Очистка JPEG и PNG</li>
             <li>Локально, без загрузки</li>
           </ul>
-          <a class="project-card__link" href="https://prism.net.ru/projects/prism-photo-exif">
-            <span>Открыть страницу проекта</span>
+          <button class="project-card__link project-card__open" type="button" data-project-open="exif" aria-haspopup="dialog" aria-controls="project-modal" aria-expanded="false">
+            <span>Карточка проекта</span>
             <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
-          </a>
+          </button>
         </div>
         <div class="project-card__visual" aria-hidden="true">
           <svg class="project-preview" viewBox="0 0 680 400" focusable="false">
@@ -288,6 +290,47 @@
       </article>
     </section>
   </main>
+
+  <div class="project-modal" id="project-modal" hidden>
+    <div class="project-modal__backdrop" data-project-close></div>
+    <section class="project-modal__panel" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" aria-describedby="project-modal-description" tabindex="-1">
+      <button class="project-modal__close" type="button" data-project-close aria-label="Закрыть карточку проекта">
+        <span aria-hidden="true">×</span>
+      </button>
+      <div class="project-modal__meta">
+        <span class="project-modal__index" id="project-modal-index">01</span>
+        <span class="project-modal__kind" id="project-modal-kind">ИНСТРУМЕНТ</span>
+        <span class="project-modal__status"><span class="project-modal__status-dot" aria-hidden="true"></span><span id="project-modal-status">Доступен</span></span>
+      </div>
+      <h2 class="project-modal__title" id="project-modal-title">Prism Site Compare</h2>
+      <p class="project-modal__description" id="project-modal-description">—</p>
+      <ul class="project-modal__features" id="project-modal-features" aria-label="Возможности проекта"></ul>
+      <div class="project-modal__actions">
+        <a class="project-modal__site" id="project-modal-site" href="https://prism.net.ru/projects/prism-site-compare/" target="_blank" rel="noopener noreferrer">
+          <span>Открыть сайт проекта</span>
+          <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </a>
+        <div class="project-modal__download">
+          <button class="project-modal__demo" id="project-modal-demo" type="button" aria-expanded="false" aria-controls="project-download-menu">
+            <span>Демо-версия</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 4v8m-4-4 4 4 4-4M5 16h10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </button>
+          <div class="project-download-menu" id="project-download-menu" role="menu" aria-label="Выберите систему" hidden>
+            <p class="project-download-menu__title">Скачать демо для</p>
+            <button type="button" role="menuitem" data-platform="macOS">
+              <span>macOS</span>
+              <small>демо</small>
+            </button>
+            <button type="button" role="menuitem" data-platform="Windows">
+              <span>Windows</span>
+              <small>демо</small>
+            </button>
+          </div>
+        </div>
+      </div>
+      <p class="project-modal__note" id="project-modal-note" role="status" aria-live="polite">Демо-сборки пока не загружены.</p>
+    </section>
+  </div>
 
   <footer class="site-footer" id="footer">
     <a class="brand brand--footer" href="#hero" aria-label="Prism — в начало страницы">

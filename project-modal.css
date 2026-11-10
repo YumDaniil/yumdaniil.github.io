@@ -1,0 +1,401 @@
+/* Prism Site v13 — project card dialog and demo menu. */
+
+.project-card__open {
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.project-card__open svg {
+  flex: 0 0 auto;
+}
+
+.project-modal {
+  position: fixed;
+  z-index: 1200;
+  inset: 0;
+  padding: clamp(0.8rem, 3vw, 2rem);
+  place-items: center;
+}
+
+.project-modal:not([hidden]) {
+  display: grid;
+}
+
+.project-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(8 9 7 / 76%);
+  opacity: 0;
+  backdrop-filter: blur(10px);
+  transition: opacity 260ms var(--ease-optical);
+}
+
+.project-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: min(42rem, 100%);
+  max-height: calc(100svh - 2rem);
+  overflow: auto;
+  padding: clamp(1.4rem, 4vw, 2.5rem);
+  border: 1px solid var(--prism-rule-strong);
+  background:
+    linear-gradient(145deg, rgb(240 238 231 / 4%), transparent 42%),
+    var(--prism-bg-raised);
+  box-shadow: 0 2.5rem 7rem rgb(0 0 0 / 55%);
+  opacity: 0;
+  transform: translateY(1rem) scale(0.985);
+  transition:
+    opacity 300ms var(--ease-optical),
+    transform 380ms var(--ease-optical);
+  scrollbar-color: #777064 transparent;
+  scrollbar-width: thin;
+}
+
+.project-modal__panel::before {
+  position: absolute;
+  top: 0;
+  right: 1.5rem;
+  left: 1.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--prism-amber), transparent);
+  content: "";
+  opacity: .7;
+  pointer-events: none;
+}
+
+.project-modal.is-open .project-modal__backdrop {
+  opacity: 1;
+}
+
+.project-modal.is-open .project-modal__panel {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.project-modal__close {
+  position: absolute;
+  z-index: 2;
+  top: 0.8rem;
+  right: 0.8rem;
+  display: grid;
+  width: 2.45rem;
+  height: 2.45rem;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--prism-rule);
+  border-radius: 50%;
+  background: rgb(16 17 15 / 55%);
+  color: var(--prism-muted);
+  font-size: 1.35rem;
+  line-height: 1;
+  transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease, transform 220ms var(--ease-optical);
+}
+
+.project-modal__close:hover {
+  border-color: var(--prism-amber);
+  background: rgb(232 196 134 / 9%);
+  color: var(--prism-amber);
+  transform: rotate(8deg);
+}
+
+.project-modal__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 1rem;
+  padding-right: 2.7rem;
+  color: var(--prism-muted);
+  font-size: 0.61rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.project-modal__index {
+  color: var(--prism-amber);
+  font-variant-numeric: tabular-nums;
+}
+
+.project-modal__kind {
+  padding-right: 1rem;
+  border-right: 1px solid var(--prism-rule);
+}
+
+.project-modal__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.48rem;
+  color: var(--prism-ink-soft);
+  font-size: 0.57rem;
+  letter-spacing: 0.075em;
+}
+
+.project-modal__status-dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  flex: 0 0 auto;
+  border: 1px solid var(--prism-amber);
+  border-radius: 50%;
+  background: rgb(232 196 134 / 28%);
+  box-shadow: 0 0 0 0 rgb(232 196 134 / 24%);
+  animation: project-status-pulse 2.4s ease-out infinite;
+}
+
+.project-modal__title {
+  max-width: 14ch;
+  margin: 1.25rem 0 0;
+  color: var(--prism-ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-size: clamp(2.15rem, 5vw, 3.35rem);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.project-modal__description {
+  max-width: 35rem;
+  margin: 1rem 0 0;
+  color: var(--prism-ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+
+.project-modal__features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.1rem;
+  margin: 1.2rem 0 0;
+  padding: 0;
+  color: var(--prism-muted);
+  font-size: 0.68rem;
+  list-style: none;
+}
+
+.project-modal__features li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.project-modal__features li::before {
+  width: 0.28rem;
+  height: 0.28rem;
+  border: 1px solid var(--prism-cool);
+  content: "";
+  transform: rotate(45deg);
+}
+
+.project-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.65rem;
+  margin-top: 1.65rem;
+}
+
+.project-modal__site,
+.project-modal__demo {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.72rem;
+  padding: 0.6rem 0.95rem;
+  border: 1px solid rgb(232 196 134 / 42%);
+  background: rgb(232 196 134 / 5%);
+  color: var(--prism-ink);
+  font: inherit;
+  font-size: 0.78rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 220ms var(--ease-optical);
+}
+
+.project-modal__site svg,
+.project-modal__demo svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: 0 0 auto;
+  transition: transform 220ms var(--ease-optical);
+}
+
+.project-modal__site:hover,
+.project-modal__demo:hover {
+  border-color: var(--prism-amber);
+  background: rgb(232 196 134 / 12%);
+  color: var(--prism-amber);
+}
+
+.project-modal__site:hover svg {
+  transform: translateX(0.25rem);
+}
+
+.project-modal__demo {
+  border-color: var(--prism-amber);
+  background: var(--prism-amber);
+  color: var(--prism-bg);
+}
+
+.project-modal__demo:hover {
+  border-color: #f3d8a3;
+  background: #f3d8a3;
+  color: var(--prism-bg);
+  transform: translateY(-1px);
+}
+
+.project-modal__demo[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.project-modal__download {
+  position: relative;
+}
+
+.project-download-menu {
+  position: relative;
+  z-index: 4;
+  width: 14rem;
+  margin-top: 0.55rem;
+  padding: 0.45rem;
+  border: 1px solid var(--prism-rule-strong);
+  background: #1b1c18;
+  box-shadow: 0 1.2rem 2.6rem rgb(0 0 0 / 42%);
+  animation: project-menu-in 180ms var(--ease-optical) both;
+}
+
+.project-download-menu__title {
+  margin: 0.35rem 0.5rem 0.4rem;
+  color: var(--prism-muted);
+  font-size: 0.57rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.project-download-menu button {
+  display: flex;
+  width: 100%;
+  min-height: 2.65rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--prism-ink);
+  font: inherit;
+  font-size: 0.78rem;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease;
+}
+
+.project-download-menu button small {
+  color: var(--prism-muted);
+  font-size: 0.56rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.project-download-menu button:hover,
+.project-download-menu button:focus-visible {
+  border-color: rgb(232 196 134 / 42%);
+  background: rgb(232 196 134 / 8%);
+  color: var(--prism-amber);
+}
+
+.project-download-menu button:hover small,
+.project-download-menu button:focus-visible small {
+  color: var(--prism-amber);
+}
+
+.project-modal__note {
+  min-height: 1.3rem;
+  margin: 0.85rem 0 0;
+  color: var(--prism-ink-soft);
+  font-size: 0.71rem;
+  line-height: 1.5;
+}
+
+body.project-modal-open {
+  overflow: hidden;
+}
+
+@keyframes project-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 680px) {
+  .project-modal {
+    padding: 0.65rem;
+  }
+
+  .project-modal__panel {
+    max-height: calc(100svh - 1.3rem);
+    padding: 1.35rem;
+  }
+
+  .project-modal__panel::before {
+    right: 1rem;
+    left: 1rem;
+  }
+
+  .project-modal__title {
+    font-size: clamp(2rem, 10vw, 2.8rem);
+  }
+
+  .project-modal__description {
+    font-size: 0.87rem;
+  }
+
+  .project-modal__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .project-modal__site,
+  .project-modal__demo,
+  .project-modal__download {
+    width: 100%;
+  }
+
+  .project-download-menu {
+    right: auto;
+    left: auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .project-modal__features {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-modal__backdrop,
+  .project-modal__panel,
+  .project-modal__close,
+  .project-download-menu,
+  .project-modal__site,
+  .project-modal__demo {
+    animation: none !important;
+    transition: none !important;
+  }
+}
