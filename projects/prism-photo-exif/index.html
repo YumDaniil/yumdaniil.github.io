@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prism Photo EXIF — что фотография рассказывает о вас</title>
+  <meta name="description" content="Просмотр EXIF, GPS и служебных данных фотографии. Локальная очистка перед публикацией — без загрузки на сервер.">
+  <meta name="theme-color" content="#0e1012">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true">
+    <span class="ambient-orb ambient-orb-a"></span>
+    <span class="ambient-orb ambient-orb-b"></span>
+    <span class="ambient-orb ambient-orb-c"></span>
+    <span class="ambient-grain"></span>
+  </div>
+
+  <a class="skip-link" href="#appMain">Перейти к содержимому</a>
+
+  <div class="app-shell">
+    <header class="app-header">
+      <a class="brand" href="./" aria-label="Prism Photo EXIF — на главную">
+        <span class="brand-mark" aria-hidden="true">P</span>
+        <span class="brand-name">Prism <span>Photo EXIF</span></span>
+      </a>
+      <div class="header-side">
+        <span class="local-badge"><span class="local-dot" aria-hidden="true"></span>Всё локально</span>
+        <span class="header-note">Без загрузки на сервер</span>
+      </div>
+    </header>
+
+    <main id="appMain" class="workspace" tabindex="-1">
+      <section class="intro" aria-labelledby="pageTitle">
+        <div class="intro-copy">
+          <p class="eyebrow">ФОТОГРАФИИ · МЕТАДАННЫЕ</p>
+          <h1 id="pageTitle">Что фотография<br><span class="accent">рассказывает о вас</span></h1>
+          <p class="lead">Посмотрите EXIF, GPS и служебные данные. Уберите лишнее перед публикацией — фотография не покидает этот Mac.</p>
+        </div>
+        <aside class="hero-side" aria-label="Принцип работы">
+          <div class="hero-scan" aria-hidden="true">
+            <div class="hero-scan-glow"></div>
+            <div class="hero-scan-frame">
+              <span class="hero-scan-corner hero-scan-corner-a"></span>
+              <span class="hero-scan-corner hero-scan-corner-b"></span>
+              <span class="hero-scan-corner hero-scan-corner-c"></span>
+              <span class="hero-scan-corner hero-scan-corner-d"></span>
+              <span class="hero-scan-line"></span>
+              <span class="hero-scan-letter">P</span>
+              <span class="hero-scan-caption">SCANNING<br>METADATA</span>
+            </div>
+            <span class="hero-chip hero-chip-gps">GPS</span>
+            <span class="hero-chip hero-chip-device">iPhone</span>
+            <span class="hero-chip hero-chip-time">15:42</span>
+            <span class="hero-scan-orbit"></span>
+          </div>
+          <div class="privacy-note">
+            <span class="privacy-mark" aria-hidden="true">⌁</span>
+            <div>
+              <strong>Только на этом Mac</strong>
+              <p>Файлы читаются в браузере. Ни одна фотография не отправляется на сервер.</p>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="mode-bar" aria-label="Режим работы">
+        <div class="mode-switch" role="tablist" aria-label="Режим работы">
+          <span class="mode-glider" aria-hidden="true"></span>
+          <button class="mode-tab is-active" id="tabView" type="button" role="tab" aria-selected="true" aria-controls="viewPane" data-mode="view">Просмотр</button>
+          <button class="mode-tab" id="tabClean" type="button" role="tab" aria-selected="false" aria-controls="cleanPane" data-mode="clean">Очистка</button>
+        </div>
+        <p class="mode-hint" id="modeHint">Загрузите фотографию, чтобы увидеть её данные</p>
+      </section>
+
+      <div class="photo-workspace">
+        <aside class="panel photo-card" aria-labelledby="photoTitle">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">01 / ФОТО</p>
+              <h2 id="photoTitle">Ваш снимок</h2>
+            </div>
+            <span class="file-kind" id="fileKind">—</span>
+          </div>
+
+          <p class="load-error" id="loadError" role="alert" hidden></p>
+
+          <div class="drop-zone" id="dropZone" tabindex="0" role="button" aria-label="Загрузить фотографию">
+            <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,image/tiff,image/avif,.dng,.DNG,.cr2,.CR2,.nef,.NEF,.arw,.ARW,.raf,.RAF,.orf,.ORF,.rw2,.RW2" hidden>
+
+            <div class="drop-empty" id="dropEmpty">
+              <div class="drop-icon" aria-hidden="true">＋</div>
+              <p class="drop-title">Перетащите фотографию</p>
+              <p class="drop-copy">JPEG, PNG, HEIC, TIFF, WebP, AVIF и RAW</p>
+              <span class="button button-secondary">Выбрать файл</span>
+            </div>
+
+            <div class="photo-preview" id="photoPreview" hidden>
+              <img id="photoImage" alt="Предпросмотр выбранной фотографии">
+              <div class="preview-shade" aria-hidden="true"></div>
+              <div class="preview-fallback" id="previewFallback" hidden>
+                <span aria-hidden="true">◌</span>
+                <p>Предпросмотр недоступен в этом браузере.<br>Данные фотографии всё равно можно посмотреть.</p>
+              </div>
+              <span class="preview-badge" id="previewBadge">—</span>
+              <button class="button button-quiet preview-replace" id="replaceButton" type="button">Заменить</button>
+            </div>
+          </div>
+
+          <div class="photo-meta" aria-live="polite">
+            <div class="meta-row"><span>Файл</span><strong id="metaName">Не выбран</strong></div>
+            <div class="meta-row"><span>Размер</span><strong id="metaSize">—</strong></div>
+            <div class="meta-row"><span>Формат</span><strong id="metaType">—</strong></div>
+          </div>
+
+          <div class="photo-actions">
+            <button class="button button-primary" id="pickButton" type="button">Выбрать фото</button>
+            <button class="button button-quiet" id="demoButton" type="button">Открыть демо</button>
+          </div>
+          <p class="panel-note">Оригинал не изменяется. Экспорт создаёт отдельную копию.</p>
+        </aside>
+
+        <section class="panel data-card" aria-label="Данные фотографии">
+          <div class="data-empty" id="emptyData">
+            <span class="empty-mark" aria-hidden="true">◎</span>
+            <p class="eyebrow">02 / ДАННЫЕ</p>
+            <h2>Данные появятся здесь</h2>
+            <p>Загрузите фотографию или откройте демо — покажем, что она записала о камере, месте и съёмке.</p>
+            <button class="button button-secondary" id="emptyDemoButton" type="button">Открыть демо</button>
+          </div>
+
+          <div class="data-pane" id="viewPane" hidden>
+            <div class="privacy-banner" id="privacyBanner" role="status">
+              <span class="banner-icon" id="privacyIcon" aria-hidden="true">!</span>
+              <div class="banner-copy">
+                <strong id="privacyTitle">Проверяем данные…</strong>
+                <p id="privacyText">—</p>
+              </div>
+              <span class="banner-count" id="privacyCount">—</span>
+            </div>
+
+            <section class="diagnostics" id="diagnostics" hidden aria-labelledby="diagnosticsTitle">
+              <button class="diagnostics-toggle" id="diagnosticsToggle" type="button" aria-expanded="false" aria-controls="diagnosticsBody">
+                <span class="diagnostics-mark" aria-hidden="true">?</span>
+                <span>
+                  <strong id="diagnosticsTitle">Почему данных нет?</strong>
+                  <small>Покажем, что именно проверило приложение</small>
+                </span>
+                <span class="diagnostics-chevron" aria-hidden="true">⌄</span>
+              </button>
+              <div class="diagnostics-body" id="diagnosticsBody" hidden>
+                <p id="diagnosticsText">—</p>
+                <dl id="diagnosticsFacts"></dl>
+              </div>
+            </section>
+
+            <div class="summary-grid" id="summaryGrid">
+              <article class="summary-card">
+                <span class="summary-label">Устройство</span>
+                <strong id="sumDevice">—</strong>
+                <span class="summary-sub" id="sumDeviceSub">Не записано</span>
+              </article>
+              <article class="summary-card">
+                <span class="summary-label">Снято</span>
+                <strong id="sumDate">—</strong>
+                <span class="summary-sub" id="sumDateSub">Дата не записана</span>
+              </article>
+              <article class="summary-card">
+                <span class="summary-label">Место</span>
+                <strong id="sumPlace">—</strong>
+                <span class="summary-sub" id="sumPlaceSub">Геоданных нет</span>
+              </article>
+              <article class="summary-card">
+                <span class="summary-label">Файл</span>
+                <strong id="sumFile">—</strong>
+                <span class="summary-sub" id="sumFileSub">—</span>
+              </article>
+            </div>
+
+            <div class="exposure-strip" id="exposureStrip" hidden>
+              <span class="exposure-label">Съёмка</span>
+              <div class="exposure-items" id="exposureItems"></div>
+            </div>
+
+            <section class="location-card" id="locationCard" hidden aria-labelledby="locationTitle">
+              <div class="mini-map" aria-hidden="true">
+                <div class="map-grid"></div>
+                <span class="map-ring"></span>
+                <span class="map-pin">P</span>
+                <span class="map-compass">N</span>
+              </div>
+              <div class="location-copy">
+                <p class="eyebrow">ГЕОДАННЫЕ</p>
+                <h3 id="locationTitle">Место съёмки</h3>
+                <p class="location-coords" id="locCoords">—</p>
+                <div class="location-facts">
+                  <span>Высота <strong id="locAltitude">—</strong></span>
+                  <span>Направление <strong id="locDirection">—</strong></span>
+                </div>
+                <a class="text-link" id="locMapLink" href="#" target="_blank" rel="noopener noreferrer">Открыть на карте ↗</a>
+                <p class="location-note">Ссылка откроет OpenStreetMap в новой вкладке.</p>
+              </div>
+            </section>
+
+            <section class="tags-section" aria-labelledby="tagsTitle">
+              <div class="section-head">
+                <div>
+                  <p class="eyebrow">ВСЕ ДАННЫЕ</p>
+                  <h2 id="tagsTitle">Что записано в файле</h2>
+                </div>
+                <div class="tag-tools">
+                  <label class="search-field">
+                    <span class="search-icon" aria-hidden="true">⌕</span>
+                    <span class="sr-only">Поиск по тегам и значениям</span>
+                    <input id="tagSearch" type="search" placeholder="Найти тег или значение" autocomplete="off">
+                  </label>
+                  <label class="select-field">
+                    <span class="sr-only">Группа данных</span>
+                    <select id="tagGroup" aria-label="Группа данных">
+                      <option value="all">Все группы</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+
+              <div class="tag-summary">
+                <span id="tagCount">0 тегов</span>
+                <span id="tagFilterNote">Показаны все найденные данные</span>
+              </div>
+
+              <div class="tag-table-wrap">
+                <table class="tag-table">
+                  <thead>
+                    <tr><th>Тег</th><th>Значение</th><th>Группа</th><th><span class="sr-only">Копировать</span></th></tr>
+                  </thead>
+                  <tbody id="tagBody"></tbody>
+                </table>
+                <div class="tag-empty" id="tagEmpty" hidden>Ничего не найдено. Попробуйте другой запрос.</div>
+              </div>
+              <p class="table-note">Двоичные блоки вроде MakerNote не раскрываются полностью — показываем только то, что можно прочитать.</p>
+            </section>
+          </div>
+
+          <div class="data-pane" id="cleanPane" hidden>
+            <div class="data-empty" id="cleanEmpty">
+              <span class="empty-mark" aria-hidden="true">◇</span>
+              <p class="eyebrow">ОЧИСТКА</p>
+              <h2>Сначала загрузите фото</h2>
+              <p>Мы покажем, какие данные можно убрать, и сохраним чистую копию. Оригинал останется нетронутым.</p>
+              <button class="button button-secondary" id="cleanDemoButton" type="button">Открыть демо</button>
+            </div>
+
+            <div id="cleanWorkspace" hidden>
+              <div class="clean-heading">
+                <div>
+                  <p class="eyebrow">ОЧИСТКА</p>
+                  <h2>Уберите лишнее</h2>
+                  <p>Выберите данные, которые не хотите отдавать вместе с фотографией.</p>
+                </div>
+                <span class="format-note" id="cleanFormatNote">JPEG · доступна выборочная очистка</span>
+              </div>
+
+              <div class="clean-layout">
+                <div class="clean-options" id="cleanOptions">
+                  <label class="clean-option" data-option="gps">
+                    <input type="checkbox" id="optGps">
+                    <span class="check-box" aria-hidden="true"></span>
+                    <span class="option-copy"><strong>Геоданные</strong><small>Координаты, высота и направление</small></span>
+                    <span class="option-count" id="countGps">0</span>
+                  </label>
+                  <label class="clean-option" data-option="camera">
+                    <input type="checkbox" id="optCamera">
+                    <span class="check-box" aria-hidden="true"></span>
+                    <span class="option-copy"><strong>Камера и устройство</strong><small>Модель, объектив, серийные номера</small></span>
+                    <span class="option-count" id="countCamera">0</span>
+                  </label>
+                  <label class="clean-option" data-option="dates">
+                    <input type="checkbox" id="optDates">
+                    <span class="check-box" aria-hidden="true"></span>
+                    <span class="option-copy"><strong>Даты съёмки</strong><small>Когда и во сколько сделан снимок</small></span>
+                    <span class="option-count" id="countDates">0</span>
+                  </label>
+                  <label class="clean-option" data-option="author">
+                    <input type="checkbox" id="optAuthor">
+                    <span class="check-box" aria-hidden="true"></span>
+                    <span class="option-copy"><strong>Автор и подпись</strong><small>Имя, копирайт, комментарий</small></span>
+                    <span class="option-count" id="countAuthor">0</span>
+                  </label>
+                  <label class="clean-option" data-option="software">
+                    <input type="checkbox" id="optSoftware">
+                    <span class="check-box" aria-hidden="true"></span>
+                    <span class="option-copy"><strong>Программа обработки</strong><small>Редактор и служебные пометки</small></span>
+                    <span class="option-count" id="countSoftware">0</span>
+                  </label>
+                  <label class="clean-option clean-option-all" data-option="all">
+                    <input type="checkbox" id="optAll">
+                    <span class="check-box" aria-hidden="true"></span>
+                    <span class="option-copy"><strong>Все метаданные</strong><small>Оставить только изображение, ориентацию и цветовой профиль</small></span>
+                    <span class="option-count" id="countAll">—</span>
+                  </label>
+                </div>
+
+                <aside class="clean-preview" aria-labelledby="cleanPreviewTitle">
+                  <p class="eyebrow">ПЕРЕД ЭКСПОРТОМ</p>
+                  <h3 id="cleanPreviewTitle">Будет удалено</h3>
+                  <ul class="clean-list" id="cleanList">
+                    <li class="clean-list-empty">Ничего не выбрано</li>
+                  </ul>
+                  <div class="clean-total"><strong id="cleanCount">0</strong><span>полей</span></div>
+                  <button class="button button-primary" id="exportButton" type="button" disabled>Скачать чистую копию</button>
+                  <p class="clean-note" id="cleanNote">Ориентация и цветовой профиль сохраняются. Оригинал не меняется.</p>
+                  <div class="export-result" id="exportResult" role="status" hidden>
+                    <span class="result-icon" aria-hidden="true">✓</span>
+                    <div>
+                      <strong id="exportResultTitle">Готово</strong>
+                      <p id="exportResultText">—</p>
+                    </div>
+                  </div>
+                </aside>
+              </div>
+
+              <div class="clean-footnote" id="cleanLimitNote" hidden></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <span>Prism Photo EXIF</span>
+      <span>Данные остаются на этом Mac · <span id="footerYear">2026</span></span>
+    </footer>
+  </div>
+
+  <noscript>
+    <div class="noscript-message">Для работы приложения нужен JavaScript. Файлы обрабатываются только в браузере.</div>
+  </noscript>
+
+  <script src="vendor/exifr.full.umd.js"></script>
+  <script src="vendor/piexif.js"></script>
+  <script src="assets/demo-photo.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

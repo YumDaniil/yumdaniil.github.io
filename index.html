@@ -136,14 +136,14 @@
     <section class="projects section" id="projects" aria-labelledby="projects-title">
       <div class="section__index" data-reveal aria-hidden="true">02 <span></span> ПРОЕКТЫ</div>
       <div class="projects__heading" data-reveal>
-        <p class="eyebrow">Первый проект Prism</p>
-        <h2 class="section__title" id="projects-title">Всё начинается<br>с первого проекта.</h2>
+        <p class="eyebrow">Два проекта Prism</p>
+        <h2 class="section__title" id="projects-title">Два проекта.<br>Одна идея.</h2>
       </div>
       <article class="project-card" data-reveal aria-labelledby="project-compare-title">
         <div class="project-card__copy">
           <div class="project-card__meta">
             <span class="project-card__number"><span>01</span> / ИНСТРУМЕНТ</span>
-            <span class="project-card__status"><span class="project-card__status-dot" aria-hidden="true"></span>Страница готовится</span>
+            <span class="project-card__status"><span class="project-card__status-dot" aria-hidden="true"></span>Доступен</span>
           </div>
           <h3 class="project-card__title" id="project-compare-title">Prism Site Compare</h3>
           <p class="project-card__description">Сравнивайте снимки экранов и веб-страницы — рядом, в наложении или переключаясь между ними.</p>
@@ -197,6 +197,94 @@
           </svg>
         </div>
         <span class="project-card__coordinate" aria-hidden="true">PRISM / 01</span>
+      </article>
+
+      <article class="project-card project-card--reverse" data-reveal aria-labelledby="project-exif-title">
+        <div class="project-card__copy">
+          <div class="project-card__meta">
+            <span class="project-card__number"><span>02</span> / ИНСТРУМЕНТ</span>
+            <span class="project-card__status"><span class="project-card__status-dot" aria-hidden="true"></span>Доступен</span>
+          </div>
+          <h3 class="project-card__title" id="project-exif-title">Prism Photo EXIF</h3>
+          <p class="project-card__description">Смотрите EXIF, GPS и служебные данные фотографии. Убирайте лишнее перед публикацией — оригинал остаётся нетронутым.</p>
+          <ul class="project-card__features" aria-label="Возможности проекта">
+            <li>Просмотр EXIF и GPS</li>
+            <li>Очистка JPEG и PNG</li>
+            <li>Локально, без загрузки</li>
+          </ul>
+          <a class="project-card__link" href="https://prism.net.ru/projects/prism-photo-exif">
+            <span>Открыть страницу проекта</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </a>
+        </div>
+        <div class="project-card__visual" aria-hidden="true">
+          <svg class="project-preview" viewBox="0 0 680 400" focusable="false">
+            <defs>
+              <linearGradient id="exif-sky" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#d7bd8c" stop-opacity=".34" />
+                <stop offset=".55" stop-color="#a9c6c3" stop-opacity=".14" />
+                <stop offset="1" stop-color="#d89a88" stop-opacity=".12" />
+              </linearGradient>
+              <linearGradient id="exif-horizon" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#e8c486" stop-opacity=".2" />
+                <stop offset="1" stop-color="#10110f" stop-opacity=".7" />
+              </linearGradient>
+              <linearGradient id="exif-panel" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#1b1c18" />
+                <stop offset="1" stop-color="#121310" />
+              </linearGradient>
+            </defs>
+
+            <rect x="1" y="1" width="678" height="398" fill="#141512" stroke="rgba(240,238,231,.24)" />
+            <path d="M1 49.5H679" stroke="rgba(240,238,231,.15)" />
+            <text x="25" y="32" fill="#e8c486" font-size="11" letter-spacing="2.2" font-family="Helvetica Neue, Arial, sans-serif">PRISM / PHOTO EXIF</text>
+            <circle cx="635" cy="25" r="3" fill="#e8c486" opacity=".75" />
+            <circle cx="650" cy="25" r="3" fill="#a9c6c3" opacity=".65" />
+            <circle cx="665" cy="25" r="3" fill="#d89a88" opacity=".65" />
+
+            <rect x="22" y="70" width="304" height="282" fill="#1a1b17" stroke="rgba(240,238,231,.14)" />
+            <rect x="22" y="70" width="304" height="32" fill="rgba(240,238,231,.035)" />
+            <text x="38" y="91" fill="#a09f96" font-size="10" letter-spacing="1.8" font-family="Helvetica Neue, Arial, sans-serif">ФОТО</text>
+            <text x="310" y="91" text-anchor="end" fill="#e8c486" font-size="9" letter-spacing="1.4" font-family="Helvetica Neue, Arial, sans-serif">GPS</text>
+
+            <rect x="39" y="119" width="270" height="140" fill="url(#exif-sky)" />
+            <path d="M39 224 102 170l48 35 53-58 106 77v35H39Z" fill="rgba(16,17,15,.58)" />
+            <path d="M39 235 118 188l46 30 61-65 84 82v24H39Z" fill="url(#exif-horizon)" opacity=".8" />
+            <circle cx="252" cy="151" r="14" fill="rgba(240,238,231,.34)" />
+            <path d="M39 278H252M39 294H286M39 310H214" stroke="rgba(240,238,231,.22)" stroke-width="3" />
+            <path d="M39 259h270" stroke="#e8c486" stroke-opacity=".5" stroke-width="1" stroke-dasharray="3 6" />
+            <path d="M39 259h270" stroke="#e8c486" stroke-opacity=".22" stroke-width="7" stroke-dasharray="1 15" />
+            <path d="M48 128v-8m0 8h8M300 128v-8m0 8h-8M48 250v8m0-8h8M300 250v8m0-8h-8" stroke="#e8c486" stroke-opacity=".7" fill="none" stroke-width="1" />
+            <text x="39" y="338" fill="#e8c486" font-size="10" letter-spacing="1.4" font-family="Helvetica Neue, Arial, sans-serif">59.4370° N · 24.7536° E</text>
+
+            <rect x="354" y="70" width="304" height="282" fill="url(#exif-panel)" stroke="rgba(240,238,231,.14)" />
+            <rect x="354" y="70" width="304" height="32" fill="rgba(240,238,231,.035)" />
+            <text x="370" y="91" fill="#a09f96" font-size="10" letter-spacing="1.8" font-family="Helvetica Neue, Arial, sans-serif">EXIF / ДАННЫЕ</text>
+
+            <text x="370" y="128" fill="#a09f96" font-size="9" letter-spacing="1.4" font-family="Helvetica Neue, Arial, sans-serif">УСТРОЙСТВО</text>
+            <text x="370" y="146" fill="#f0eee7" font-size="15" font-family="Helvetica Neue, Arial, sans-serif">iPhone 18 Pro Max</text>
+            <path d="M370 160h272" stroke="rgba(240,238,231,.13)" />
+
+            <text x="370" y="185" fill="#a09f96" font-size="9" letter-spacing="1.4" font-family="Helvetica Neue, Arial, sans-serif">СНЯТО</text>
+            <text x="370" y="203" fill="#f0eee7" font-size="15" font-family="Helvetica Neue, Arial, sans-serif">1 января 2015 · 12:34</text>
+            <path d="M370 217h272" stroke="rgba(240,238,231,.13)" />
+
+            <text x="370" y="242" fill="#a09f96" font-size="9" letter-spacing="1.4" font-family="Helvetica Neue, Arial, sans-serif">ГЕОДАННЫЕ</text>
+            <text x="370" y="260" fill="#e8c486" font-size="15" font-family="Helvetica Neue, Arial, sans-serif">Таллин, Эстония</text>
+            <text x="370" y="279" fill="#a9c6c3" font-size="10" font-family="Helvetica Neue, Arial, sans-serif">Высота 20 м · 327°</text>
+            <path d="M370 293h272" stroke="rgba(240,238,231,.13)" />
+
+            <rect x="370" y="309" width="109" height="22" fill="rgba(232,196,134,.09)" stroke="rgba(232,196,134,.3)" />
+            <text x="381" y="324" fill="#e8c486" font-size="9" letter-spacing="1.1" font-family="Helvetica Neue, Arial, sans-serif">EXIF · GPS</text>
+            <rect x="487" y="309" width="155" height="22" fill="rgba(169,198,195,.07)" stroke="rgba(169,198,195,.2)" />
+            <text x="498" y="324" fill="#a9c6c3" font-size="9" letter-spacing="1.1" font-family="Helvetica Neue, Arial, sans-serif">ЛОКАЛЬНО</text>
+
+            <path d="M340 70V352" stroke="#e8c486" stroke-opacity=".6" />
+            <circle cx="340" cy="211" r="19" fill="#171815" stroke="#e8c486" stroke-opacity=".78" />
+            <path d="M340 201v20m-10-10h20" stroke="#f0eee7" stroke-opacity=".78" stroke-width="1.2" />
+          </svg>
+        </div>
+        <span class="project-card__coordinate" aria-hidden="true">PRISM / 02</span>
       </article>
     </section>
   </main>

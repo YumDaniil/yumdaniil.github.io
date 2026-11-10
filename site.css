@@ -1528,3 +1528,46 @@ body {
     transform: none;
   }
 }
+
+/* v11: second project card, mirrored layout on wide screens */
+.project-card--reverse {
+  grid-template-columns: minmax(19rem, 1.06fr) minmax(0, 0.94fr);
+}
+
+.project-card--reverse .project-card__copy {
+  order: 2;
+}
+
+.project-card--reverse .project-card__visual {
+  order: 1;
+}
+
+.project-card--reverse::before {
+  right: 0;
+  left: auto;
+  background: linear-gradient(transparent 14%, var(--prism-amber));
+}
+
+.project-card + .project-card {
+  border-top: 0;
+}
+
+@media (max-width: 680px) {
+  .project-card--reverse {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project-card--reverse .project-card__copy {
+    order: 1;
+  }
+
+  .project-card--reverse .project-card__visual {
+    order: 2;
+  }
+
+  .project-card--reverse::before {
+    right: auto;
+    left: 0;
+    background: linear-gradient(var(--prism-amber), transparent 86%);
+  }
+}
