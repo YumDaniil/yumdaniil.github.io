@@ -40,8 +40,8 @@
       features: ['Автопродление', 'Периоды оплаты', 'Приложения macOS и Windows'],
       url: 'https://prism.net.ru/projects/prism-renew/',
       downloads: {
-        macOS: 'https://prism.net.ru/projects/prism-renew/downloads/Prism-Renew-macOS-1.0.zip',
-        Windows: 'https://prism.net.ru/projects/prism-renew/downloads/Prism-Renew-Windows-1.0.zip'
+        macOS: 'https://prism.net.ru/projects/prism-renew/downloads/Prism-Renew-macOS-1.1.zip',
+        Windows: 'https://prism.net.ru/projects/prism-renew/downloads/Prism-Renew-Windows-1.1.zip'
       }
     }
   };
