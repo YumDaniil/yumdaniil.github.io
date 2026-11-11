@@ -259,6 +259,10 @@
   position: relative;
 }
 
+.project-modal__download[hidden] {
+  display: none;
+}
+
 .project-download-menu {
   position: absolute;
   z-index: 4;

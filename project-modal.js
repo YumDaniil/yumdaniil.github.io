@@ -1,4 +1,4 @@
-/* Prism Site v13 — project cards and demo download menu. */
+/* Prism Site v14 — project cards and app downloads. */
 (function () {
   'use strict';
 
@@ -12,7 +12,11 @@
       title: 'Prism Site Compare',
       description: 'Сравнивайте снимки экранов и веб-страницы — рядом, в наложении или переключаясь между ними.',
       features: ['Снимки экрана', 'Веб-страницы', 'Три режима сравнения'],
-      url: 'https://prism.net.ru/projects/prism-site-compare/'
+      url: 'https://prism.net.ru/projects/prism-site-compare/',
+      downloads: {
+        macOS: 'https://prism.net.ru/projects/prism-site-compare/downloads/Prism-Site-Compare-macOS-2.0.zip',
+        Windows: 'https://prism.net.ru/projects/prism-site-compare/downloads/Prism-Site-Compare-Windows-2.0.zip'
+      }
     },
     exif: {
       index: '02',
@@ -21,7 +25,21 @@
       title: 'Prism Photo EXIF',
       description: 'Смотрите EXIF, GPS и служебные данные фотографии. Убирайте лишнее перед публикацией — оригинал остаётся нетронутым.',
       features: ['Просмотр EXIF и GPS', 'Очистка JPEG и PNG', 'Локально, без загрузки'],
-      url: 'https://prism.net.ru/projects/prism-photo-exif/'
+      url: 'https://prism.net.ru/projects/prism-photo-exif/',
+      downloads: {
+        macOS: 'https://prism.net.ru/projects/prism-photo-exif/downloads/Prism-Photo-EXIF-macOS-1.0.zip',
+        Windows: 'https://prism.net.ru/projects/prism-photo-exif/downloads/Prism-Photo-EXIF-Windows-1.0.zip'
+      }
+    },
+    renew: {
+      index: '03',
+      kind: 'ТРЕКЕР',
+      status: 'Сайт доступен',
+      title: 'Prism Renew',
+      description: 'Локальный трекер подписок: автопродления, разовые оплаты, периоды оплаты и реальная сумма списаний.',
+      features: ['Автопродление', 'Периоды оплаты', 'Без банка и облака'],
+      url: 'https://prism.net.ru/projects/prism-renew/',
+      downloads: null
     }
   };
 
@@ -38,8 +56,10 @@
   var demoButton = document.getElementById('project-modal-demo');
   var menu = document.getElementById('project-download-menu');
   var note = document.getElementById('project-modal-note');
+  var downloadBlock = demoButton ? demoButton.closest('.project-modal__download') : null;
   var openButtons = Array.prototype.slice.call(document.querySelectorAll('[data-project-open]'));
   var lastTrigger = null;
+  var currentProject = null;
   var menuOpen = false;
   var closeTimer = null;
 
@@ -97,6 +117,7 @@
     var project = projects[key];
     if (!project) return;
     lastTrigger = trigger || null;
+    currentProject = project;
     index.textContent = project.index;
     kind.textContent = project.kind;
     status.textContent = project.status;
@@ -110,7 +131,13 @@
     });
     siteLink.href = project.url;
     siteLink.setAttribute('aria-label', 'Открыть сайт проекта ' + project.title);
-    note.textContent = 'Демо-сборки пока не загружены.';
+    var hasDownloads = Boolean(project.downloads);
+    if (downloadBlock) downloadBlock.hidden = !hasDownloads;
+    demoButton.disabled = !hasDownloads;
+    demoButton.setAttribute('aria-expanded', 'false');
+    note.textContent = hasDownloads
+      ? 'Выберите систему — начнётся скачивание архива.'
+      : 'Приложения для macOS и Windows в разработке.';
     closeMenu(false);
     openButtons.forEach(function (button) {
       button.setAttribute('aria-expanded', String(button === trigger));
@@ -150,8 +177,18 @@
     var choice = event.target.closest('[data-platform]');
     if (!choice) return;
     var platform = choice.getAttribute('data-platform');
-    note.textContent = 'Демо-сборка для ' + platform + ' пока не загружена.';
+    var project = currentProject;
+    var url = project && project.downloads ? project.downloads[platform] : null;
+    if (!url) return;
+    note.textContent = 'Скачивание для ' + platform + ' начинается…';
     closeMenu(false);
+    var link = document.createElement('a');
+    link.href = url;
+    link.download = '';
+    link.rel = 'noopener';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
     demoButton.focus({ preventScroll: true });
   });
 
