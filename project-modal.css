@@ -36,7 +36,7 @@
   z-index: 1;
   width: min(42rem, 100%);
   max-height: calc(100svh - 2rem);
-  overflow: auto;
+  overflow: visible;
   padding: clamp(1.4rem, 4vw, 2.5rem);
   border: 1px solid var(--prism-rule-strong);
   background:
@@ -260,10 +260,12 @@
 }
 
 .project-download-menu {
-  position: relative;
+  position: absolute;
   z-index: 4;
+  right: 0;
+  top: calc(100% + 0.55rem);
+  bottom: auto;
   width: 14rem;
-  margin-top: 0.55rem;
   padding: 0.45rem;
   border: 1px solid var(--prism-rule-strong);
   background: #1b1c18;
@@ -376,7 +378,7 @@ body.project-modal-open {
 
   .project-download-menu {
     right: auto;
-    left: auto;
+    left: 0;
     width: 100%;
   }
 }
