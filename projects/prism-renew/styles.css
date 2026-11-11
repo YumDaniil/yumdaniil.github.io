@@ -1941,6 +1941,23 @@ body.modal-open {
   box-shadow: 0 0 0 3px rgb(232 196 134 / 6%);
 }
 
+.field input:disabled {
+  border-color: var(--line);
+  background: rgb(255 255 255 / 1.5%);
+  color: var(--quiet);
+  cursor: not-allowed;
+  opacity: .52;
+}
+
+.field--disabled > span {
+  opacity: .55;
+}
+
+.field--disabled .field__hint {
+  color: var(--muted);
+  opacity: .85;
+}
+
 .field input[type="date"] {
   color-scheme: dark;
 }

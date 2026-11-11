@@ -69,6 +69,7 @@
     countHint: document.getElementById('countHint'),
     period: document.getElementById('periodInput'),
     date: document.getElementById('dateInput'),
+    dateHint: document.getElementById('dateHint'),
     category: document.getElementById('categoryInput'),
     autoRenew: document.getElementById('autoRenewInput'),
     autoRenewHint: document.getElementById('autoRenewHint'),
@@ -325,7 +326,7 @@
 
   function upcomingItems(limit) {
     const sorted = billableItems()
-      .filter((item) => validIso(item.nextDate))
+      .filter((item) => item.autoRenew && validIso(item.nextDate))
       .sort((a, b) => a.nextDate.localeCompare(b.nextDate));
     return typeof limit === 'number' ? sorted.slice(0, limit) : sorted;
   }
@@ -491,7 +492,8 @@
       : item.autoRenew
         ? iconButton('pay', 'Отметить оплату', ICONS.pay, item.id)
         : iconButton('pay', item.paid ? 'Снять отметку оплаты' : 'Отметить оплаченной', item.paid ? ICONS.restore : ICONS.pay, item.id);
-    const dateCaption = !active ? 'на паузе' : paidManual ? 'оплачено' : relativeLabel(item.nextDate);
+    const dateCaption = !active ? 'на паузе' : !item.autoRenew ? (paidManual ? 'оплачено' : 'разово') : relativeLabel(item.nextDate);
+    const dateValue = item.autoRenew ? formatDate(item.nextDate) : '—';
     article.innerHTML = `
       <span class="subscription-row__icon" aria-hidden="true">${escapeHtml(initial)}</span>
       <div class="subscription-row__main">
@@ -510,7 +512,7 @@
         <span>${pricePeriodLabel(item)}</span>
       </div>
       <div class="subscription-row__date ${dateClass}">
-        <strong>${formatDate(item.nextDate)}</strong>
+        <strong>${dateValue}</strong>
         <span>${dateCaption}</span>
       </div>
       <div class="row-actions">
@@ -535,7 +537,7 @@
     if (!items.length) {
       const empty = document.createElement('p');
       empty.className = 'upcoming-empty';
-      const hasBillable = billableItems().length > 0;
+      const hasBillable = billableItems().some((item) => item.autoRenew);
       empty.textContent = !state.items.length
         ? 'Пока нет списаний.'
         : hasBillable
@@ -546,7 +548,7 @@
         ? 'Ближайшие списания появятся после первой подписки.'
         : hasBillable
           ? 'Включите подписку или добавьте новую, чтобы увидеть календарь.'
-          : 'Подписки без автопродления уже оплачены и не попадают в расходы.';
+          : 'У разовых подписок нет следующего списания — дата не нужна.';
       return;
     }
     items.forEach((item) => {
@@ -742,6 +744,17 @@
       : 'Разовая оплата: после отметки «оплачено» не входит в расходы.';
     if (ui.paidField) ui.paidField.hidden = auto;
     if (auto && ui.paid) ui.paid.checked = false;
+    if (ui.date) {
+      ui.date.disabled = !auto;
+      ui.date.required = auto;
+      const field = ui.date.closest('.field');
+      if (field) field.classList.toggle('field--disabled', !auto);
+    }
+    if (ui.dateHint) {
+      ui.dateHint.textContent = auto
+        ? 'Когда спишутся деньги.'
+        : 'У разовой подписки нет следующего списания.';
+    }
   }
 
   function updateCountHint() {
@@ -767,8 +780,8 @@
     if (!Number.isInteger(intervalCount) || intervalCount < 1 || intervalCount > 36) {
       return showFormError('Количество периодов должно быть от 1 до 36.');
     }
-    if (!validIso(date)) return showFormError('Выберите дату следующего списания.');
     const autoRenew = Boolean(ui.autoRenew.checked);
+    if (autoRenew && !validIso(date)) return showFormError('Выберите дату следующего списания.');
     const paid = autoRenew ? false : Boolean(ui.paid.checked);
     const data = {
       name,
@@ -777,7 +790,7 @@
       intervalCount,
       autoRenew,
       paid,
-      nextDate: date,
+      nextDate: validIso(date) ? date : defaultDate(),
       category: ui.category.value,
       notes: ui.notes.value.trim().slice(0, 180)
     };
