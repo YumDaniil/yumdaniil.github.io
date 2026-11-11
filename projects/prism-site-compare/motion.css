@@ -1195,6 +1195,227 @@ button.mode-button[aria-pressed="true"],
   font-weight: 550;
 }
 
+/* App downloads ----------------------------------------------------- */
+
+.download-band {
+  display: grid;
+  min-width: 0;
+  gap: 9px;
+}
+
+.download-panel {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "intro actions"
+    "notes notes";
+  align-items: center;
+  gap: 15px 26px;
+  padding: clamp(16px, 2.1vw, 22px);
+  overflow: hidden;
+  border: 1px solid var(--v4-line);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 4% -20%, rgb(239 146 124 / 9%), transparent 24rem),
+    radial-gradient(circle at 96% 130%, rgb(232 196 134 / 8%), transparent 22rem),
+    linear-gradient(135deg, rgb(255 255 255 / 3.5%), transparent 54%),
+    rgb(14 17 19 / 76%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 4%), 0 18px 46px rgb(0 0 0 / 16%);
+}
+
+.download-panel::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--v4-amber), transparent);
+  content: "";
+  opacity: .55;
+  pointer-events: none;
+}
+
+.download-intro {
+  grid-area: intro;
+  min-width: 0;
+}
+
+#appShell .download-intro .eyebrow {
+  margin-block-end: 4px;
+  color: var(--v4-amber);
+}
+
+#appShell .download-intro h2 {
+  margin: 0;
+  color: var(--v4-ink);
+  font-family: var(--v4-serif);
+  font-size: clamp(1.35rem, 2.1vw, 1.78rem);
+  font-weight: 400;
+  letter-spacing: -.045em;
+  line-height: 1.1;
+}
+
+#appShell .download-lead {
+  max-width: 56ch;
+  margin: 7px 0 0;
+  color: var(--v4-muted);
+  font-size: .79rem;
+  line-height: 1.55;
+}
+
+#appShell .download-lead code {
+  padding: 1px 5px;
+  border: 1px solid var(--v4-line);
+  border-radius: 5px;
+  background: rgb(255 255 255 / 5%);
+  color: var(--v4-amber);
+  font-family: ui-monospace, "SF Mono", Consolas, monospace;
+  font-size: .72rem;
+}
+
+.download-actions {
+  display: flex;
+  min-width: 0;
+  grid-area: actions;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#appShell .download-button {
+  display: inline-flex;
+  min-width: 212px;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 13px;
+  border: 1px solid var(--v4-line-strong);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 4%);
+  color: var(--v4-ink);
+  text-decoration: none;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 4%);
+  transition:
+    transform 240ms var(--v4-ease),
+    border-color 200ms ease,
+    background-color 200ms ease,
+    box-shadow 240ms var(--v4-ease);
+}
+
+#appShell .download-button:hover {
+  border-color: rgb(232 196 134 / 55%);
+  background: rgb(255 255 255 / 7%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 6%), 0 12px 28px rgb(0 0 0 / 26%);
+  transform: translateY(-2px);
+}
+
+#appShell .download-button:active {
+  transform: translateY(0) scale(.99);
+}
+
+#appShell .download-button--primary {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--v4-peach), var(--v4-amber));
+  color: #26140f;
+  box-shadow: 0 10px 26px rgb(232 196 134 / 18%);
+}
+
+#appShell .download-button--primary:hover {
+  border-color: transparent;
+  background: linear-gradient(135deg, #ffab96, #f3d29c);
+  box-shadow: 0 14px 34px rgb(232 196 134 / 26%);
+  color: #26140f;
+}
+
+.download-glyph {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 9px;
+  background: rgb(232 196 134 / 11%);
+  color: var(--v4-amber);
+}
+
+.download-glyph svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+#appShell .download-button--primary .download-glyph {
+  background: rgb(38 20 15 / 10%);
+  color: #26140f;
+}
+
+.download-button-text {
+  display: grid;
+  min-width: 0;
+  gap: 1px;
+  text-align: left;
+}
+
+.download-button-text strong {
+  color: inherit;
+  font-size: .82rem;
+  font-weight: 650;
+  letter-spacing: -.01em;
+  line-height: 1.25;
+}
+
+.download-button-text span {
+  color: var(--v4-quiet);
+  font-size: .66rem;
+  letter-spacing: .02em;
+  line-height: 1.3;
+}
+
+#appShell .download-button--primary .download-button-text span {
+  color: #4a3527;
+}
+
+.download-arrow {
+  margin-inline-start: auto;
+  color: currentColor;
+  font-size: .95rem;
+  line-height: 1;
+  opacity: .55;
+  transition: transform 240ms var(--v4-ease), opacity 200ms ease;
+}
+
+#appShell .download-button:hover .download-arrow {
+  opacity: .9;
+  transform: translateY(2px);
+}
+
+.download-notes {
+  display: grid;
+  min-width: 0;
+  grid-area: notes;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px 24px;
+  padding-block-start: 12px;
+  border-top: 1px solid var(--v4-line);
+}
+
+#appShell .download-notes p {
+  display: flex;
+  min-width: 0;
+  gap: 7px;
+  margin: 0;
+  color: #9c9a93;
+  font-size: .75rem;
+  line-height: 1.52;
+}
+
+.download-notes strong {
+  flex: 0 0 auto;
+  color: #d9d5cc;
+  font-weight: 600;
+}
+
 /* Reveal and entrance --------------------------------------------- */
 
 .v4-js [data-reveal] {
@@ -1352,6 +1573,23 @@ button.mode-button[aria-pressed="true"],
     grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
   }
 
+  .download-panel {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "intro"
+      "actions"
+      "notes";
+    gap: 15px;
+  }
+
+  .download-actions {
+    flex-wrap: wrap;
+  }
+
+  #appShell .download-button {
+    flex: 1 1 240px;
+  }
+
   .compare-orbit {
     height: 150px;
   }
@@ -1493,6 +1731,38 @@ button.mode-button[aria-pressed="true"],
   .app-footer {
     flex-direction: column;
   }
+
+  .download-panel {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "intro"
+      "actions"
+      "notes";
+    gap: 14px;
+    padding: 16px;
+    border-radius: 15px;
+  }
+
+  #appShell .download-intro h2 {
+    font-size: 1.45rem;
+  }
+
+  .download-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  #appShell .download-button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .download-notes {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+    padding-block-start: 10px;
+  }
 }
 
 @media (max-width: 380px) {
@@ -1502,6 +1772,28 @@ button.mode-button[aria-pressed="true"],
 
   #appShell .intro h1 {
     font-size: 2.4rem;
+  }
+
+  .download-panel {
+    padding: 14px;
+  }
+
+  #appShell .download-intro h2 {
+    font-size: 1.3rem;
+  }
+
+  #appShell .download-lead {
+    font-size: .75rem;
+  }
+
+  #appShell .download-button {
+    padding: 10px 12px;
+    gap: 9px;
+  }
+
+  .download-glyph {
+    width: 30px;
+    height: 30px;
   }
 
   .source-tabs button {
@@ -1545,7 +1837,9 @@ button.mode-button[aria-pressed="true"],
   #emptyState::after,
   .stage-scanline,
   .wipe-handle span,
-  .v4-ripple {
+  .v4-ripple,
+  .download-button,
+  .download-arrow {
     animation: none !important;
     transition: none !important;
   }
