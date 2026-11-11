@@ -34,12 +34,15 @@
     renew: {
       index: '03',
       kind: 'ТРЕКЕР',
-      status: 'Сайт доступен',
+      status: 'Доступен',
       title: 'Prism Renew',
       description: 'Локальный трекер подписок: автопродления, разовые оплаты, периоды оплаты и реальная сумма списаний.',
-      features: ['Автопродление', 'Периоды оплаты', 'Без банка и облака'],
+      features: ['Автопродление', 'Периоды оплаты', 'Приложения macOS и Windows'],
       url: 'https://prism.net.ru/projects/prism-renew/',
-      downloads: null
+      downloads: {
+        macOS: 'https://prism.net.ru/projects/prism-renew/downloads/Prism-Renew-macOS-1.0.zip',
+        Windows: 'https://prism.net.ru/projects/prism-renew/downloads/Prism-Renew-Windows-1.0.zip'
+      }
     }
   };
 
