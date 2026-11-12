@@ -389,15 +389,17 @@
         <article class="contact-card contact-card--general">
           <div class="contact-card__head">
             <span class="contact-card__label">Общая почта</span>
-            <button class="contact-help" type="button" data-contact-help aria-label="Пояснение к общей почте" aria-describedby="contact-help-tip" aria-controls="contact-help-tip" aria-expanded="false">?</button>
           </div>
-          <a class="contact-card__email" href="mailto:hello@prism.net.ru">hello@prism.net.ru</a>
+          <div class="contact-card__email-row">
+            <a class="contact-card__email" href="mailto:hello@prism.net.ru">hello@prism.net.ru</a>
+            <button class="contact-help" type="button" data-contact-help aria-label="Пояснение к общей почте" aria-describedby="contact-help-tip" aria-controls="contact-help-tip" aria-expanded="false">?</button>
+            <div class="contact-tooltip" id="contact-help-tip" role="tooltip" hidden>
+              <p><strong>Можно писать с любым вопросом.</strong> На общую почту можно обратиться и за информацией, и за поддержкой — ответят.</p>
+              <p>Для вопросов по конкретной теме есть отдельные адреса: info@prism.net.ru — информация, support@prism.net.ru — поддержка.</p>
+            </div>
+          </div>
           <p class="contact-card__description">Любой вопрос о Prism, проектах и приложениях.</p>
           <p class="contact-card__footer">Общий адрес для обратной связи</p>
-          <div class="contact-tooltip" id="contact-help-tip" role="tooltip" hidden>
-            <p><strong>Можно писать с любым вопросом.</strong> На общую почту можно обратиться и за информацией, и за поддержкой — ответят.</p>
-            <p>Для вопросов по конкретной теме есть отдельные адреса: info@prism.net.ru — информация, support@prism.net.ru — поддержка.</p>
-          </div>
         </article>
 
         <article class="contact-card">

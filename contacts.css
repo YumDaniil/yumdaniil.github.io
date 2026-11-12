@@ -92,6 +92,19 @@
   transition: color 180ms ease, text-decoration-color 180ms ease;
 }
 
+.contact-card__email-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin-top: 1.2rem;
+}
+
+.contact-card__email-row .contact-card__email {
+  margin-top: 0;
+}
+
 .contact-card__email:hover,
 .contact-card__email:focus-visible {
   color: var(--prism-amber);
@@ -146,9 +159,8 @@
 .contact-tooltip {
   position: absolute;
   z-index: 20;
-  top: 2.15rem;
-  right: 0;
-  left: auto;
+  top: calc(100% + 0.6rem);
+  left: 0;
   width: min(21rem, calc(100vw - 2.5rem));
   padding: 1rem 1.05rem;
   border: 1px solid rgb(232 196 134 / 38%);
@@ -163,8 +175,7 @@
 .contact-tooltip::before {
   position: absolute;
   top: -0.38rem;
-  right: 0.62rem;
-  left: auto;
+  left: 0.62rem;
   width: 0.65rem;
   height: 0.65rem;
   border-top: 1px solid rgb(232 196 134 / 38%);
