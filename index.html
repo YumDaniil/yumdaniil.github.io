@@ -9,8 +9,10 @@
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="stylesheet" href="./site.css">
   <link rel="stylesheet" href="./project-modal.css">
+  <link rel="stylesheet" href="./contacts.css">
   <script src="./site.js" defer></script>
   <script src="./project-modal.js" defer></script>
+  <script src="./contacts.js" defer></script>
   <!-- Yandex.Metrika counter -->
   <script type="text/javascript">
       (function(m,e,t,r,i,k,a){
@@ -52,6 +54,7 @@
     <nav class="site-nav" id="site-nav" aria-label="Основная навигация">
       <a class="site-nav__link" href="#idea">Идея</a>
       <a class="site-nav__link" href="#projects">Проекты</a>
+      <a class="site-nav__link" href="#contacts">Контакты</a>
     </nav>
   </header>
 
@@ -375,6 +378,47 @@
         <span class="project-card__coordinate" aria-hidden="true">PRISM / 03</span>
       </article>
     </section>
+
+    <section class="contacts section" id="contacts" aria-labelledby="contacts-title">
+      <div class="section__index" data-reveal aria-hidden="true">03 <span></span> КОНТАКТЫ</div>
+      <div class="contacts__heading" data-reveal>
+        <p class="eyebrow">Контакты и обратная связь</p>
+        <h2 class="section__title contacts__title" id="contacts-title">Напишите<br><em>напрямую.</em></h2>
+      </div>
+      <div class="contacts__grid" data-reveal>
+        <article class="contact-card contact-card--general">
+          <div class="contact-card__head">
+            <span class="contact-card__label">Общая почта</span>
+            <button class="contact-help" type="button" data-contact-help aria-label="Пояснение к общей почте" aria-describedby="contact-help-tip" aria-controls="contact-help-tip" aria-expanded="false">?</button>
+          </div>
+          <a class="contact-card__email" href="mailto:hello@prism.net.ru">hello@prism.net.ru</a>
+          <p class="contact-card__description">Любой вопрос о Prism, проектах и приложениях.</p>
+          <p class="contact-card__footer">Общий адрес для обратной связи</p>
+          <div class="contact-tooltip" id="contact-help-tip" role="tooltip" hidden>
+            <p><strong>Можно писать с любым вопросом.</strong> На общую почту можно обратиться и за информацией, и за поддержкой — ответят.</p>
+            <p>Для вопросов по конкретной теме есть отдельные адреса: info@prism.net.ru — информация, support@prism.net.ru — поддержка.</p>
+          </div>
+        </article>
+
+        <article class="contact-card">
+          <div class="contact-card__head">
+            <span class="contact-card__label">Информация</span>
+          </div>
+          <a class="contact-card__email" href="mailto:info@prism.net.ru">info@prism.net.ru</a>
+          <p class="contact-card__description">Материалы, сотрудничество и вопросы о проектах.</p>
+          <p class="contact-card__footer">Для запросов по конкретной теме</p>
+        </article>
+
+        <article class="contact-card">
+          <div class="contact-card__head">
+            <span class="contact-card__label">Поддержка</span>
+          </div>
+          <a class="contact-card__email" href="mailto:support@prism.net.ru">support@prism.net.ru</a>
+          <p class="contact-card__description">Помощь с приложениями и сайтами Prism.</p>
+          <p class="contact-card__footer">Для обращений о работе продуктов</p>
+        </article>
+      </div>
+    </section>
   </main>
 
   <div class="project-modal" id="project-modal" hidden>
@@ -431,6 +475,7 @@
     <nav class="site-footer__nav" aria-label="Навигация в подвале">
       <a href="#idea">Идея</a>
       <a href="#projects">Проекты</a>
+      <a href="#contacts">Контакты</a>
       <a href="#hero">В начало <span aria-hidden="true">↑</span></a>
     </nav>
     <p class="site-footer__signature">От идеи до работающего продукта.</p>

@@ -1,0 +1,236 @@
+/* Prism — contacts section */
+.contacts {
+  position: relative;
+  padding-block: clamp(5rem, 10vw, 9rem);
+  border-bottom: 1px solid var(--prism-rule);
+  background:
+    radial-gradient(ellipse at 90% 20%, rgb(232 196 134 / 5%), transparent 28rem),
+    linear-gradient(180deg, transparent, rgb(240 238 231 / 1.4%));
+}
+
+.contacts .section__index {
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.contacts__heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.contacts__heading .eyebrow {
+  align-self: flex-start;
+  margin: 0 0 1.4rem;
+}
+
+.contacts__title {
+  max-width: 12ch;
+}
+
+.contacts__title em {
+  color: var(--prism-amber);
+  font-weight: 400;
+}
+
+.contacts__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.9rem, 1.5vw, 1.25rem);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.contact-card {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 15.5rem;
+  flex-direction: column;
+  padding: 1.4rem 1.35rem 1.25rem;
+  overflow: visible;
+  border: 1px solid var(--prism-rule);
+  border-top-color: var(--prism-rule-strong);
+  background: linear-gradient(145deg, rgb(240 238 231 / 4.5%), rgb(240 238 231 / 1.2%));
+}
+
+.contact-card--general {
+  border-top-color: rgb(232 196 134 / 55%);
+  background:
+    radial-gradient(circle at 100% 0%, rgb(232 196 134 / 8%), transparent 13rem),
+    linear-gradient(145deg, rgb(240 238 231 / 4.5%), rgb(240 238 231 / 1.2%));
+}
+
+.contact-card__head {
+  display: flex;
+  min-height: 1.7rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.contact-card__label {
+  color: var(--prism-muted);
+  font-size: 0.61rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.contact-card__email {
+  display: inline-block;
+  max-width: 100%;
+  margin-top: 1.2rem;
+  color: var(--prism-ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-size: clamp(1.12rem, 2vw, 1.55rem);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  text-decoration-color: rgb(232 196 134 / 45%);
+  text-decoration-line: underline;
+  text-underline-offset: 0.22em;
+  transition: color 180ms ease, text-decoration-color 180ms ease;
+}
+
+.contact-card__email:hover,
+.contact-card__email:focus-visible {
+  color: var(--prism-amber);
+  text-decoration-color: currentColor;
+}
+
+.contact-card__description {
+  margin: 1rem 0 0;
+  color: var(--prism-muted);
+  font-size: 0.8rem;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.contact-card__footer {
+  margin-top: auto;
+  padding-top: 1.3rem;
+  color: var(--prism-muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.contact-help {
+  display: grid;
+  width: 1.65rem;
+  height: 1.65rem;
+  flex: 0 0 auto;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgb(232 196 134 / 55%);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--prism-amber);
+  font-family: Georgia, serif;
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1;
+  cursor: help;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.contact-help:hover,
+.contact-help:focus-visible,
+.contact-help[aria-expanded="true"] {
+  border-color: var(--prism-amber);
+  background: var(--prism-amber);
+  color: var(--prism-bg);
+}
+
+.contact-tooltip {
+  position: absolute;
+  z-index: 20;
+  top: 2.15rem;
+  right: 0;
+  left: auto;
+  width: min(21rem, calc(100vw - 2.5rem));
+  padding: 1rem 1.05rem;
+  border: 1px solid rgb(232 196 134 / 38%);
+  background: #1b1c18;
+  box-shadow: 0 1.2rem 3rem rgb(0 0 0 / 35%);
+  color: var(--prism-ink-soft);
+  font-size: 0.76rem;
+  line-height: 1.62;
+  text-wrap: pretty;
+}
+
+.contact-tooltip::before {
+  position: absolute;
+  top: -0.38rem;
+  right: 0.62rem;
+  left: auto;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-top: 1px solid rgb(232 196 134 / 38%);
+  border-left: 1px solid rgb(232 196 134 / 38%);
+  background: #1b1c18;
+  content: "";
+  transform: rotate(45deg);
+}
+
+.contact-tooltip p {
+  margin: 0;
+}
+
+.contact-tooltip p + p {
+  margin-top: 0.65rem;
+}
+
+.contact-tooltip strong {
+  color: var(--prism-ink);
+  font-weight: 600;
+}
+
+.contact-tooltip a {
+  color: var(--prism-amber);
+  text-decoration-color: rgb(232 196 134 / 45%);
+}
+
+.contact-tooltip[hidden] {
+  display: none;
+}
+
+.contacts__note {
+  margin: clamp(1.5rem, 3vw, 2.2rem) 0 0;
+  color: var(--prism-muted);
+  font-size: 0.72rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 960px) {
+  .contacts__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contact-card--general {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 680px) {
+  .contacts__heading {
+    display: block;
+  }
+
+  .contacts__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .contact-card--general {
+    grid-column: auto;
+  }
+
+  .contact-card {
+    min-height: 13.5rem;
+  }
+
+  .contact-tooltip {
+    width: min(20rem, calc(100vw - 2.5rem));
+  }
+}
