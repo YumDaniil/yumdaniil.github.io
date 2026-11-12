@@ -38,6 +38,7 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(0.9rem, 1.5vw, 1.25rem);
   margin-top: clamp(2.5rem, 5vw, 4rem);
+  overflow: visible;
 }
 
 .contact-card {
