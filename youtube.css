@@ -1,0 +1,194 @@
+/* Prism — YouTube section */
+.youtube {
+  position: relative;
+  padding-block: clamp(5rem, 10vw, 9rem);
+  border-bottom: 1px solid var(--prism-rule);
+  background:
+    radial-gradient(ellipse at 10% 45%, rgb(232 196 134 / 5%), transparent 25rem),
+    linear-gradient(180deg, transparent, rgb(240 238 231 / 1.2%));
+}
+
+.youtube .section__index {
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.youtube__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(20rem, 1.15fr);
+  align-items: end;
+  gap: clamp(2.2rem, 7vw, 7rem);
+}
+
+.youtube__title {
+  max-width: 10ch;
+}
+
+.youtube__title em {
+  color: var(--prism-amber);
+  font-weight: 400;
+}
+
+.youtube__lead {
+  max-width: 31rem;
+  margin: 1.5rem 0 0;
+  padding-left: clamp(1rem, 2.2vw, 1.8rem);
+  border-left: 1px solid var(--prism-rule-strong);
+  color: var(--prism-muted);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  text-wrap: pretty;
+}
+
+.youtube-card {
+  position: relative;
+  display: flex;
+  min-height: 18rem;
+  align-items: flex-end;
+  gap: 1.25rem;
+  padding: clamp(1.6rem, 3.2vw, 2.4rem);
+  overflow: hidden;
+  border: 1px solid var(--prism-rule);
+  border-top-color: rgb(232 196 134 / 52%);
+  background:
+    radial-gradient(circle at 82% 18%, rgb(232 196 134 / 15%), transparent 13rem),
+    linear-gradient(145deg, #1b1d17, #11130f);
+  color: var(--prism-ink);
+  text-decoration: none;
+  transition: border-color 220ms ease, transform 260ms var(--ease-optical), box-shadow 260ms ease;
+}
+
+.youtube-card::before {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(115deg, transparent 0 54%, rgb(240 238 231 / 4%) 54.1% 54.5%, transparent 54.6%),
+    linear-gradient(65deg, transparent 0 72%, rgb(232 196 134 / 7%) 72.1% 72.4%, transparent 72.5%);
+  content: "";
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.youtube-card::after {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  width: 4.6rem;
+  height: 4.6rem;
+  border: 1px solid rgb(232 196 134 / 20%);
+  border-radius: 50%;
+  content: "";
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.youtube-card:hover,
+.youtube-card:focus-visible {
+  border-color: rgb(232 196 134 / 58%);
+  box-shadow: 0 1.4rem 3.5rem rgb(0 0 0 / 26%);
+  transform: translateY(-3px);
+}
+
+.youtube-card__play {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 4rem;
+  height: 4rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgb(232 196 134 / 65%);
+  border-radius: 50%;
+  background: rgb(232 196 134 / 10%);
+  color: var(--prism-amber);
+  transition: background 220ms ease, color 220ms ease;
+}
+
+.youtube-card:hover .youtube-card__play,
+.youtube-card:focus-visible .youtube-card__play {
+  background: var(--prism-amber);
+  color: var(--prism-bg);
+}
+
+.youtube-card__play svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-left: 0.15rem;
+}
+
+.youtube-card__copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.youtube-card__label {
+  color: var(--prism-amber);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.youtube-card__copy strong {
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  overflow-wrap: anywhere;
+}
+
+.youtube-card__copy > span:last-child {
+  color: var(--prism-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.youtube-card__arrow {
+  position: absolute;
+  z-index: 1;
+  right: 1.55rem;
+  bottom: 1.5rem;
+  color: var(--prism-amber);
+  font-family: Georgia, serif;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+@media (max-width: 900px) {
+  .youtube__layout {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .youtube__lead {
+    max-width: 40rem;
+  }
+
+  .youtube-card {
+    min-height: 14rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .youtube-card {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+    min-height: 12rem;
+    padding: 1.35rem;
+  }
+
+  .youtube-card__arrow {
+    display: none;
+  }
+
+  .youtube-card::after {
+    width: 3.6rem;
+    height: 3.6rem;
+  }
+}

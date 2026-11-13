@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="./site.css">
   <link rel="stylesheet" href="./project-modal.css">
   <link rel="stylesheet" href="./contacts.css">
+  <link rel="stylesheet" href="./youtube.css">
   <script src="./site.js" defer></script>
   <script src="./project-modal.js" defer></script>
   <script src="./contacts.js" defer></script>
@@ -54,6 +55,7 @@
     <nav class="site-nav" id="site-nav" aria-label="Основная навигация">
       <a class="site-nav__link" href="#idea">Идея</a>
       <a class="site-nav__link" href="#projects">Проекты</a>
+      <a class="site-nav__link" href="#youtube">YouTube</a>
       <a class="site-nav__link" href="#contacts">Контакты</a>
     </nav>
   </header>
@@ -379,8 +381,31 @@
       </article>
     </section>
 
+    <section class="youtube section" id="youtube" aria-labelledby="youtube-title">
+      <div class="section__index" data-reveal aria-hidden="true">03 <span></span> ВИДЕО</div>
+      <div class="youtube__layout">
+        <div class="youtube__intro" data-reveal>
+          <p class="eyebrow">YouTube</p>
+          <h2 class="section__title youtube__title" id="youtube-title">Prism<br><em>в движении.</em></h2>
+          <p class="youtube__lead">Короткие ролики о том, как идея превращается в готовый продукт: разработка, демонстрации и разборы инструментов Prism.</p>
+        </div>
+
+        <a class="youtube-card" href="https://www.youtube.com/@prismnetru" target="_blank" rel="noopener noreferrer" data-reveal aria-label="Открыть YouTube-канал Prism">
+          <span class="youtube-card__play" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false"><path d="m9 6 9 6-9 6V6Z" fill="currentColor" /></svg>
+          </span>
+          <span class="youtube-card__copy">
+            <span class="youtube-card__label">Канал Prism</span>
+            <strong>@prismnetru</strong>
+            <span>Смотреть ролики на YouTube</span>
+          </span>
+          <span class="youtube-card__arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+
     <section class="contacts section" id="contacts" aria-labelledby="contacts-title">
-      <div class="section__index" data-reveal aria-hidden="true">03 <span></span> КОНТАКТЫ</div>
+      <div class="section__index" data-reveal aria-hidden="true">04 <span></span> КОНТАКТЫ</div>
       <div class="contacts__heading" data-reveal>
         <p class="eyebrow">Контакты и обратная связь</p>
         <h2 class="section__title contacts__title" id="contacts-title">Напишите<br><em>напрямую.</em></h2>
@@ -477,6 +502,7 @@
     <nav class="site-footer__nav" aria-label="Навигация в подвале">
       <a href="#idea">Идея</a>
       <a href="#projects">Проекты</a>
+      <a href="#youtube">YouTube</a>
       <a href="#contacts">Контакты</a>
       <a href="#hero">В начало <span aria-hidden="true">↑</span></a>
     </nav>
