@@ -1,0 +1,70 @@
+/* Prism — hero download button */
+.hero-download {
+  display: inline-flex;
+  min-height: 2.8rem;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0 1rem 0 0.65rem;
+  border: 1px solid rgb(232 196 134 / 58%);
+  background: rgb(232 196 134 / 8%);
+  color: var(--prism-amber);
+  text-decoration: none;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms var(--ease-optical);
+}
+
+.hero-download:hover,
+.hero-download:focus-visible {
+  border-color: var(--prism-amber);
+  background: var(--prism-amber);
+  color: var(--prism-bg);
+  transform: translateY(-1px);
+}
+
+.hero-download__icon {
+  display: grid;
+  width: 1.55rem;
+  height: 1.55rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.hero-download__icon svg {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.hero-download__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+  line-height: 1.15;
+}
+
+.hero-download__copy strong {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.hero-download__copy small {
+  color: var(--prism-muted);
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.hero-download:hover .hero-download__copy small,
+.hero-download:focus-visible .hero-download__copy small {
+  color: rgb(16 17 15 / 72%);
+}
+
+@media (max-width: 680px) {
+  .hero-download {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
